@@ -1,0 +1,1243 @@
+<!DOCTYPE html>
+<html class="scroll-smooth" lang="pt-BR">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Wallach Assessoria Jurídica — Design System V1.1</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              navy:        '#1C2E5C',
+              navyhover:   '#243870',
+              darkbg:      '#0D1829',
+              steel:       '#8090A8',
+              steellight:  '#A0B0C4',
+              steeldark:   '#60748A',
+            },
+            surface: {
+              card:  '#ffffff',
+              dark:  '#0F1E35',
+              glass: 'rgba(255, 255, 255, 0.05)',
+            }
+          },
+          fontFamily: {
+            display: ['"Cormorant Garant"', 'Georgia', 'serif'],
+            body:    ['Lora', 'serif'],
+            label:   ['Inter', 'system-ui', 'sans-serif'],
+          },
+          boxShadow: {
+            card:      '0 10px 30px -5px rgba(0, 0, 0, 0.08), 0 4px 6px -4px rgba(0, 0, 0, 0.04)',
+            cardhover: '0 20px 40px -10px rgba(0, 0, 0, 0.12), 0 10px 15px -5px rgba(0, 0, 0, 0.08)',
+            header:    '0 4px 20px rgba(0, 0, 0, 0.05)',
+            glow:      '0 0 25px rgba(128, 144, 168, 0.25), 0 8px 40px rgba(128, 144, 168, 0.12)',
+          },
+          borderRadius: {
+            '2xl': '1rem',
+            '3xl': '1.5rem',
+          }
+        },
+      },
+    };
+  </script>
+  
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garant:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Inter:wght@400;500;600&family=Lora:wght@400;500;600&display=swap');
+
+    :root {
+      --navy-bg: #0D1829;
+      --card-bg: #ffffff;
+      --card-radius: 1.5rem;
+    }
+    
+    body { 
+      font-family: 'Lora', serif;
+      background-color: var(--navy-bg);
+      overflow-x: hidden;
+      color: #333;
+    }
+
+    h1, h2, h3, h4 {
+      font-family: 'Cormorant Garant', Georgia, serif;
+    }
+    
+    /* Section Card System */
+    .section-card {
+      background-color: var(--card-bg);
+      border-radius: var(--card-radius);
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+      margin: 2rem 4%; 
+      overflow: hidden;
+      position: relative;
+    }
+    
+    .section-card.dark {
+      background-color: #0F1E35;
+      color: white;
+    }
+
+    @media (max-width: 768px) {
+      .section-card {
+        margin: 1rem 12px;
+        border-radius: 1rem;
+      }
+    }
+
+    /* Motion & Animation System */
+    @keyframes gv-fade-slide-in {
+      0%   { opacity: 0; transform: translateY(30px); filter: blur(8px); }
+      100% { opacity: 1; transform: translateY(0);    filter: blur(0);   }
+    }
+
+    @keyframes gv-clip-reveal {
+      0%   { clip-path: inset(0 100% 0 0); }
+      100% { clip-path: inset(0 0% 0 0);   }
+    }
+
+    @keyframes gv-shimmer {
+      0%   { transform: translateX(-100%) skewX(-15deg); }
+      100% { transform: translateX(300%)  skewX(-15deg); }
+    }
+
+    @keyframes gv-float-up {
+      0%   { transform: translateY(0);     opacity: 1; }
+      85%  { opacity: 0; }
+      100% { transform: translateY(-50px); opacity: 0; }
+    }
+
+    @keyframes gv-beam-fall {
+      0%   { transform: translateY(-100%); opacity: 0;   }
+      5%   { opacity: 0.6; }
+      50%  { opacity: 1;   }
+      95%  { opacity: 0.6; }
+      100% { transform: translateY(200%);  opacity: 0;   }
+    }
+
+    /* ─── Wallach Text Animations ─────────────────────── */
+
+    @keyframes wallach-word-up {
+      0%   { transform: translateY(110%); opacity: 0; }
+      100% { transform: translateY(0);    opacity: 1; }
+    }
+
+    @keyframes wallach-spacing-expand {
+      0%   { letter-spacing: -0.08em; opacity: 0; }
+      100% { letter-spacing: -0.02em; opacity: 1; }
+    }
+
+    @keyframes wallach-fade-left {
+      0%   { opacity: 0; transform: translateX(-32px); }
+      100% { opacity: 1; transform: translateX(0); }
+    }
+
+    @keyframes wallach-fade-right {
+      0%   { opacity: 0; transform: translateX(32px); }
+      100% { opacity: 1; transform: translateX(0); }
+    }
+
+    @keyframes wallach-text-shimmer {
+      0%   { background-position: -200% center; }
+      100% { background-position: 200% center; }
+    }
+
+    @keyframes wallach-underline-grow {
+      0%   { transform: scaleX(0); transform-origin: left; }
+      100% { transform: scaleX(1); transform-origin: left; }
+    }
+
+    .wallach-word-mask {
+      display: inline-block;
+      overflow: hidden;
+      vertical-align: bottom;
+    }
+    .wallach-word {
+      display: inline-block;
+      transform: translateY(110%);
+      opacity: 0;
+    }
+    .wallach-word.is-visible {
+      animation: wallach-word-up 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+
+    .wallach-spacing {
+      opacity: 0;
+      letter-spacing: -0.08em;
+    }
+    .wallach-spacing.is-visible {
+      animation: wallach-spacing-expand 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+
+    .wallach-fade-left {
+      opacity: 0;
+      transform: translateX(-32px);
+    }
+    .wallach-fade-left.is-visible {
+      animation: wallach-fade-left 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+    }
+
+    .wallach-fade-right {
+      opacity: 0;
+      transform: translateX(32px);
+    }
+    .wallach-fade-right.is-visible {
+      animation: wallach-fade-right 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+    }
+
+    .wallach-shimmer-text {
+      background: linear-gradient(
+        90deg,
+        #8090A8 0%,
+        #ffffff 30%,
+        #A0B0C4 50%,
+        #ffffff 70%,
+        #8090A8 100%
+      );
+      background-size: 200% auto;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: wallach-text-shimmer 4s linear infinite;
+    }
+
+    .wallach-underline-grow::after {
+      content: '';
+      display: block;
+      height: 2px;
+      background-color: #8090A8;
+      transform: scaleX(0);
+      transform-origin: left;
+      margin-top: 6px;
+    }
+    .wallach-underline-grow.is-visible::after {
+      animation: wallach-underline-grow 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.3s forwards;
+    }
+
+    /* Scroll Reveal Classes */
+    .gv-animate-on-scroll {
+      opacity: 0;
+      transform: translateY(30px);
+      filter: blur(8px);
+    }
+    
+    .gv-animate-on-scroll.is-visible {
+      animation: gv-fade-slide-in 1s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+    }
+
+    .gv-clip-on-scroll {
+      clip-path: inset(0 100% 0 0);
+    }
+    
+    .gv-clip-on-scroll.is-visible {
+      animation: gv-clip-reveal 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+
+    .delay-100 { animation-delay: 0.1s; }
+    .delay-200 { animation-delay: 0.2s; }
+    .delay-350 { animation-delay: 0.35s; }
+    .delay-500 { animation-delay: 0.5s; }
+
+    /* Custom Button Effects */
+    .gv-btn-primary {
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .gv-btn-primary::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.35) 50%, transparent 100%);
+      width: 60%;
+      animation: gv-shimmer 3s ease-in-out infinite;
+      animation-delay: 1s;
+    }
+
+    .gv-particle {
+      position: absolute;
+      width: 2px;
+      height: 2px;
+      background: rgba(128, 144, 168, 0.5);
+      border-radius: 9999px;
+      animation: gv-float-up linear infinite;
+    }
+
+    /* Beam Effect */
+    .gv-beam { 
+      position: absolute;
+      width: 1px; 
+      height: 100px;
+      background: linear-gradient(to bottom, transparent, #8090A8, transparent); 
+    }
+    .gv-beam-1 { animation: gv-beam-fall 6s linear infinite; }
+    .gv-beam-2 { animation: gv-beam-fall 9s linear infinite; animation-delay: 3s; }
+
+    /* Accessibility */
+    @media (prefers-reduced-motion: reduce) {
+      *, ::before, ::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        opacity: 1 !important;
+        transform: none !important;
+        clip-path: none !important;
+      }
+    }
+    
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar { width: 8px; }
+    ::-webkit-scrollbar-track { background: var(--navy-bg); }
+    ::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.2); border-radius: 4px; }
+    ::-webkit-scrollbar-thumb:hover { background: rgba(255, 255, 255, 0.4); }
+  </style>
+</head>
+<body class="antialiased selection:bg-brand-steel/30 selection:text-brand-navy">
+
+  <!-- ============================================== -->
+  <!-- NAV INTERNA DO DESIGN SYSTEM                   -->
+  <!-- ============================================== -->
+  <div class="fixed top-6 left-0 right-0 z-50 flex justify-center px-4 pointer-events-none">
+    <nav class="pointer-events-auto bg-brand-darkbg/90 backdrop-blur-md border border-white/10 rounded-full py-2 px-3 flex items-center gap-6 text-sm shadow-xl">
+      <div class="flex items-center justify-center h-10 ml-1">
+        <img src="assets/midia-wallach/wallach-logo.png" alt="Wallach Assessoria Jurídica" class="h-8 w-auto object-contain brightness-0 invert" />
+      </div>
+      
+      <div class="hidden lg:flex items-center gap-6 mx-2">
+        <a href="#hero" class="text-xs uppercase tracking-widest text-slate-300 hover:text-white transition-colors">Hero</a>
+        <a href="#typography" class="text-xs uppercase tracking-widest text-slate-300 hover:text-white transition-colors">Typography</a>
+        <a href="#colors" class="text-xs uppercase tracking-widest text-slate-300 hover:text-white transition-colors">Colors</a>
+        <a href="#components" class="text-xs uppercase tracking-widest text-slate-300 hover:text-white transition-colors">Components</a>
+        <a href="#layout" class="text-xs uppercase tracking-widest text-slate-300 hover:text-white transition-colors">Layout</a>
+        <a href="#motion" class="text-xs uppercase tracking-widest text-slate-300 hover:text-white transition-colors">Motion</a>
+        <a href="#icons" class="text-xs uppercase tracking-widest text-slate-300 hover:text-white transition-colors">Icons</a>
+        <a href="#photos" class="text-xs uppercase tracking-widest text-slate-300 hover:text-white transition-colors">Photos</a>
+      </div>
+      
+      <a href="#components" class="bg-white text-slate-900 px-4 py-2 rounded-full text-xs font-bold hover:bg-slate-200 transition-colors uppercase tracking-widest">
+        Componentes
+      </a>
+    </nav>
+  </div>
+
+  <main class="pt-24 w-full">
+
+    <!-- ============================================== -->
+    <!-- SEÇÃO 0: HERO DO DS                            -->
+    <!-- ============================================== -->
+    <section id="hero" class="section-card p-8 md:p-16 lg:p-24 min-h-[85vh] flex items-center relative overflow-hidden">
+      <!-- Efeito de luz de fundo -->
+      <div class="absolute top-0 right-0 w-[500px] h-[500px] bg-brand-navy/10 rounded-full blur-[120px] pointer-events-none translate-x-1/4 -translate-y-1/4"></div>
+      
+      <div class="grid lg:grid-cols-12 gap-12 items-center w-full z-10 relative">
+        
+        <!-- Esquerda: Textos -->
+        <div class="lg:col-span-6 flex flex-col justify-center">
+          <span class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-slate-100 border border-slate-200 text-brand-navy text-[10px] font-bold uppercase tracking-widest mb-8 w-fit gv-animate-on-scroll delay-100">
+            <span class="w-2 h-2 rounded-full bg-brand-steel shadow-[0_0_8px_rgba(128,144,168,0.6)]"></span>
+            Wallach DS V1.1
+          </span>
+          
+          <h1 class="text-6xl md:text-7xl lg:text-8xl font-display font-bold text-slate-900 tracking-tighter leading-[0.9] mb-6 gv-clip-on-scroll delay-200">
+            Design <br/>
+            <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-navy to-brand-steel">System.</span>
+          </h1>
+          
+          <p class="text-lg text-slate-600 leading-relaxed mb-10 max-w-md font-body gv-animate-on-scroll delay-350">
+            Um catálogo visual interativo com a linguagem de design da Wallach Assessoria Jurídica. Identidade institucional, sofisticação e confiança em cada componente.
+          </p>
+          
+          <div class="flex flex-col sm:flex-row gap-4 gv-animate-on-scroll delay-500">
+            <a href="#components" class="gv-btn-primary inline-flex items-center justify-center gap-2 bg-brand-navy text-white px-8 py-4 rounded-full text-sm font-semibold shadow-glow hover:scale-105 transition-transform duration-300">
+              Ver Componentes
+              <i data-lucide="arrow-right" class="w-4 h-4"></i>
+              <span class="gv-particle" style="left: 20%; animation-duration: 2s; animation-delay: 0.1s;"></span>
+              <span class="gv-particle" style="left: 50%; animation-duration: 2.5s; animation-delay: 0.5s;"></span>
+              <span class="gv-particle" style="left: 80%; animation-duration: 1.8s; animation-delay: 0.3s;"></span>
+            </a>
+            <a href="#typography" class="inline-flex items-center justify-center gap-2 bg-white text-slate-700 border border-slate-200 px-8 py-4 rounded-full text-sm font-semibold hover:bg-slate-50 hover:border-slate-300 transition-all duration-300">
+              Explorar Tipografia
+            </a>
+          </div>
+        </div>
+        
+        <!-- Direita: Card Stack 3D -->
+        <div class="lg:col-span-6 flex justify-center lg:justify-end gv-animate-on-scroll delay-350">
+          <div class="relative w-full max-w-md h-[280px] cursor-pointer card-stack-container group perspective-1000">
+            
+            <div class="card-stack-item absolute inset-0 bg-surface-dark border border-slate-700/50 rounded-2xl p-8 shadow-2xl flex flex-col justify-center text-white transition-all duration-600 ease-[cubic-bezier(0.34,1.56,0.64,1)]" style="transform: translateY(24px) scale(0.9); opacity: 0.4; z-index: 10;">
+              <div class="flex gap-1 text-brand-steel mb-4"><i data-lucide="star" class="w-4 h-4"></i><i data-lucide="star" class="w-4 h-4"></i><i data-lucide="star" class="w-4 h-4"></i><i data-lucide="star" class="w-4 h-4"></i><i data-lucide="star" class="w-4 h-4"></i></div>
+              <p class="text-sm text-slate-300 italic mb-4">"A assessoria da Wallach foi decisiva para salvar nossa empresa. Profissionais excepcionais."</p>
+              <p class="text-xs font-bold uppercase tracking-widest text-slate-400">Carlos M. — CEO</p>
+            </div>
+            
+            <div class="card-stack-item absolute inset-0 bg-surface-dark border border-slate-700/50 rounded-2xl p-8 shadow-2xl flex flex-col justify-center text-white transition-all duration-600 ease-[cubic-bezier(0.34,1.56,0.64,1)]" style="transform: translateY(12px) scale(0.95); opacity: 0.6; z-index: 20;">
+              <div class="flex gap-1 text-brand-steel mb-4"><i data-lucide="star" class="w-4 h-4"></i><i data-lucide="star" class="w-4 h-4"></i><i data-lucide="star" class="w-4 h-4"></i><i data-lucide="star" class="w-4 h-4"></i><i data-lucide="star" class="w-4 h-4"></i></div>
+              <p class="text-sm text-slate-300 italic mb-4">"Resolução ágil e total transparência em cada etapa do processo. Recomendo sem hesitar."</p>
+              <p class="text-xs font-bold uppercase tracking-widest text-slate-400">Fernanda L. — Empresária</p>
+            </div>
+            
+            <div class="card-stack-item absolute inset-0 bg-gradient-to-br from-brand-navy to-surface-dark border border-brand-navy/50 rounded-2xl p-8 shadow-2xl flex flex-col justify-center text-white transition-all duration-600 ease-[cubic-bezier(0.34,1.56,0.64,1)]" style="transform: translateY(0) scale(1); opacity: 1; z-index: 30;">
+              <div class="flex gap-1 text-brand-steel mb-4"><i data-lucide="star" class="w-4 h-4"></i><i data-lucide="star" class="w-4 h-4"></i><i data-lucide="star" class="w-4 h-4"></i><i data-lucide="star" class="w-4 h-4"></i><i data-lucide="star" class="w-4 h-4"></i></div>
+              <p class="text-lg text-white font-display italic mb-6 leading-relaxed">"Excelência técnica e atendimento personalizado. A Wallach cuidou do nosso caso com total dedicação e obteve o resultado que precisávamos."</p>
+              <p class="text-xs font-bold uppercase tracking-widest text-brand-steel">Ricardo A.</p>
+              <p class="text-[10px] text-slate-400">Cliente — Recuperação Judicial</p>
+            </div>
+            
+            <!-- Instrução de clique -->
+            <div class="absolute -bottom-10 w-full text-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+              <span class="text-[10px] font-label uppercase tracking-widest text-brand-steel flex items-center justify-center gap-2">
+                <i data-lucide="mouse-pointer-click" class="w-3 h-3"></i> Clique para rotacionar
+              </span>
+            </div>
+          </div>
+        </div>
+        
+      </div>
+    </section>
+
+    <!-- ============================================== -->
+    <!-- SEÇÃO 1: TIPOGRAFIA                            -->
+    <!-- ============================================== -->
+    <section id="typography" class="section-card dark p-8 md:p-16 lg:p-24">
+      <div class="mb-16 gv-animate-on-scroll">
+        <h2 class="text-3xl font-body font-semibold tracking-tight text-white mb-2">Tipografia</h2>
+        <p class="text-slate-400 font-body">Escala tipográfica usando Cormorant Garant (Display), Lora (Body) e Inter (Label).</p>
+      </div>
+
+      <div class="space-y-12">
+        <!-- Nível 1 -->
+        <div class="flex flex-col md:flex-row md:items-start justify-between gap-8 border-b border-white/10 pb-8 gv-animate-on-scroll delay-100">
+          <div class="w-full md:w-1/4">
+            <span class="text-xs font-label uppercase tracking-widest text-slate-500 block">H1 / Hero Display</span>
+          </div>
+          <div class="w-full md:w-1/2">
+            <h1 class="text-6xl md:text-7xl font-display font-bold tracking-tighter text-white leading-[0.9] gv-clip-on-scroll">
+              Assessoria Jurídica
+            </h1>
+          </div>
+          <div class="w-full md:w-1/4 md:text-right">
+            <span class="font-mono text-sm text-slate-500">Cormorant Garant 700<br/>72px / 64px</span>
+          </div>
+        </div>
+
+        <!-- Nível 2 -->
+        <div class="flex flex-col md:flex-row md:items-start justify-between gap-8 border-b border-white/10 pb-8 gv-animate-on-scroll delay-100">
+          <div class="w-full md:w-1/4">
+            <span class="text-xs font-label uppercase tracking-widest text-slate-500 block">H2 / Section Title</span>
+          </div>
+          <div class="w-full md:w-1/2">
+            <h2 class="text-5xl md:text-6xl font-display font-semibold text-white leading-[1.05] wallach-spacing">
+              Áreas de Atuação
+            </h2>
+          </div>
+          <div class="w-full md:w-1/4 md:text-right">
+            <span class="font-mono text-sm text-slate-500">Cormorant Garant 600<br/>56px / 60px</span>
+          </div>
+        </div>
+
+        <!-- Nível 3 -->
+        <div class="flex flex-col md:flex-row md:items-start justify-between gap-8 border-b border-white/10 pb-8 gv-animate-on-scroll delay-100">
+          <div class="w-full md:w-1/4">
+            <span class="text-xs font-label uppercase tracking-widest text-slate-500 block">H3 / Subsection</span>
+          </div>
+          <div class="w-full md:w-1/2">
+            <h3 class="text-3xl md:text-4xl font-display font-semibold tracking-tight text-white leading-[1.05] wallach-fade-left">
+              Soluções com Excelência
+            </h3>
+          </div>
+          <div class="w-full md:w-1/4 md:text-right">
+            <span class="font-mono text-sm text-slate-500">Cormorant Garant 600<br/>36px / 40px</span>
+          </div>
+        </div>
+
+        <!-- Nível 4 -->
+        <div class="flex flex-col md:flex-row md:items-start justify-between gap-8 border-b border-white/10 pb-8 gv-animate-on-scroll delay-100">
+          <div class="w-full md:w-1/4">
+            <span class="text-xs font-label uppercase tracking-widest text-slate-500 block">H4 / Card Title</span>
+          </div>
+          <div class="w-full md:w-1/2">
+            <h4 class="text-2xl font-display font-semibold tracking-tight text-white leading-tight">
+              <span class="wallach-word-mask"><span class="wallach-word delay-100">Recuperação</span></span>
+              <span class="wallach-word-mask"><span class="wallach-word delay-200">Judicial</span></span>
+              <span class="wallach-word-mask"><span class="wallach-word delay-350">de Empresas</span></span>
+            </h4>
+          </div>
+          <div class="w-full md:w-1/4 md:text-right">
+            <span class="font-mono text-sm text-slate-500">Cormorant Garant 600<br/>24px / 32px</span>
+          </div>
+        </div>
+
+        <!-- Nível 5 -->
+        <div class="flex flex-col md:flex-row md:items-start justify-between gap-8 border-b border-white/10 pb-8 gv-animate-on-scroll delay-100">
+          <div class="w-full md:w-1/4">
+            <span class="text-xs font-label uppercase tracking-widest text-slate-500 block">Body Large</span>
+          </div>
+          <div class="w-full md:w-1/2">
+            <p class="text-lg font-body font-normal text-white/70 leading-relaxed">
+              A Wallach Assessoria Jurídica atua em cinco estados brasileiros com soluções técnicas e personalizadas, focada na resolução de conflitos com excelência.
+            </p>
+          </div>
+          <div class="w-full md:w-1/4 md:text-right">
+            <span class="font-mono text-sm text-slate-500">Lora 400<br/>18px / 28px</span>
+          </div>
+        </div>
+
+        <!-- Nível 6 -->
+        <div class="flex flex-col md:flex-row md:items-start justify-between gap-8 border-b border-white/10 pb-8 gv-animate-on-scroll delay-100">
+          <div class="w-full md:w-1/4">
+            <span class="text-xs font-label uppercase tracking-widest text-slate-500 block">Body Medium</span>
+          </div>
+          <div class="w-full md:w-1/2">
+            <p class="text-sm font-body font-normal text-white/70 leading-relaxed">
+              Assessoria jurídica especializada em Direito Empresarial, Recuperação Judicial, Imobiliário, Tributário e Civil.
+            </p>
+          </div>
+          <div class="w-full md:w-1/4 md:text-right">
+            <span class="font-mono text-sm text-slate-500">Lora 400<br/>14px / 24px</span>
+          </div>
+        </div>
+
+        <!-- Nível 7 -->
+        <div class="flex flex-col md:flex-row md:items-start justify-between gap-8 border-b border-white/10 pb-8 gv-animate-on-scroll delay-100">
+          <div class="w-full md:w-1/4">
+            <span class="text-xs font-label uppercase tracking-widest text-slate-500 block">Italic Display</span>
+          </div>
+          <div class="w-full md:w-1/2">
+            <p class="text-2xl md:text-3xl font-display italic font-medium leading-relaxed wallach-shimmer-text">
+              "Seu caso será conduzido com estratégia técnica, transparência e total comprometimento da nossa equipe."
+            </p>
+          </div>
+          <div class="w-full md:w-1/4 md:text-right">
+            <span class="font-mono text-sm text-slate-500">Cormorant Garant Italic 500<br/>30px / 48px</span>
+          </div>
+        </div>
+
+        <!-- Nível 8 -->
+        <div class="flex flex-col md:flex-row md:items-start justify-between gap-8 gv-animate-on-scroll delay-100">
+          <div class="w-full md:w-1/4">
+            <span class="text-xs font-label uppercase tracking-widest text-slate-500 block">Uppercase Label</span>
+          </div>
+          <div class="w-full md:w-1/2">
+            <p class="text-[10px] font-label font-bold uppercase tracking-[0.15em] text-brand-steel wallach-underline-grow">
+              OAB/PE 21.669 | OAB/SP 421.826
+            </p>
+          </div>
+          <div class="w-full md:w-1/4 md:text-right">
+            <span class="font-mono text-sm text-slate-500">Inter 700<br/>10px / 16px</span>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ============================================== -->
+    <!-- SEÇÃO 2: CORES                                 -->
+    <!-- ============================================== -->
+    <section id="colors" class="section-card p-8 md:p-16 lg:p-24 bg-slate-50">
+      <div class="mb-12 gv-animate-on-scroll">
+        <h2 class="text-3xl font-body font-semibold tracking-tight text-slate-900 mb-2">Cores</h2>
+        <p class="text-slate-500 font-body">A paleta é extraída diretamente da logo: azul-marinho institucional como cor primária e cinza-aço prateado como acento. Sóbria, sofisticada e sem concessões.</p>
+      </div>
+
+      <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+        
+        <!-- Swatch 1 -->
+        <div class="gv-animate-on-scroll delay-100">
+          <div class="h-32 rounded-xl bg-[#0D1829] shadow-md border border-slate-200 mb-4"></div>
+          <h3 class="text-sm font-semibold text-slate-900">Dark Background</h3>
+          <p class="font-mono text-xs text-slate-500 mt-1">#0D1829</p>
+        </div>
+
+        <!-- Swatch 2 -->
+        <div class="gv-animate-on-scroll delay-100">
+          <div class="h-32 rounded-xl bg-surface-dark shadow-md border border-slate-200 mb-4"></div>
+          <h3 class="text-sm font-semibold text-slate-900">Dark Surface</h3>
+          <p class="font-mono text-xs text-slate-500 mt-1">bg-surface-dark<br/>#0F1E35</p>
+        </div>
+
+        <!-- Swatch 3 -->
+        <div class="gv-animate-on-scroll delay-100">
+          <div class="h-32 rounded-xl bg-white shadow-md border border-slate-200 mb-4"></div>
+          <h3 class="text-sm font-semibold text-slate-900">Card Light</h3>
+          <p class="font-mono text-xs text-slate-500 mt-1">bg-white<br/>#ffffff</p>
+        </div>
+
+        <!-- Swatch 4 -->
+        <div class="gv-animate-on-scroll delay-100">
+          <div class="h-32 rounded-xl bg-brand-navy shadow-md border border-slate-200 mb-4"></div>
+          <h3 class="text-sm font-semibold text-slate-900">Brand Navy</h3>
+          <p class="font-mono text-xs text-slate-500 mt-1">bg-brand-navy<br/>#1C2E5C</p>
+        </div>
+
+        <!-- Swatch 5 -->
+        <div class="gv-animate-on-scroll delay-200">
+          <div class="h-32 rounded-xl bg-brand-steel shadow-md border border-slate-200 mb-4"></div>
+          <h3 class="text-sm font-semibold text-slate-900">Brand Steel</h3>
+          <p class="font-mono text-xs text-slate-500 mt-1">bg-brand-steel<br/>#8090A8</p>
+        </div>
+
+        <!-- Swatch 6 -->
+        <div class="gv-animate-on-scroll delay-200">
+          <div class="h-32 rounded-xl bg-brand-steellight shadow-md border border-slate-200 mb-4"></div>
+          <h3 class="text-sm font-semibold text-slate-900">Steel Light</h3>
+          <p class="font-mono text-xs text-slate-500 mt-1">bg-brand-steellight<br/>#A0B0C4</p>
+        </div>
+
+        <!-- Swatch 7 -->
+        <div class="gv-animate-on-scroll delay-200">
+          <div class="h-32 rounded-xl bg-gradient-to-br from-brand-navy to-brand-steel shadow-md border border-slate-200 mb-4"></div>
+          <h3 class="text-sm font-semibold text-slate-900">Navy → Steel Gradient</h3>
+          <p class="font-mono text-xs text-slate-500 mt-1">from-navy to-steel</p>
+        </div>
+
+        <!-- Swatch 8 -->
+        <div class="gv-animate-on-scroll delay-200">
+          <div class="h-32 rounded-xl bg-white/10 backdrop-blur-md shadow-md border border-slate-800 bg-brand-navy mb-4 relative overflow-hidden flex items-center justify-center">
+            <div class="absolute inset-0 bg-white/10 backdrop-blur-xl"></div>
+            <span class="text-white relative z-10 text-xs">Glass</span>
+          </div>
+          <h3 class="text-sm font-semibold text-slate-900">Glass Surface</h3>
+          <p class="font-mono text-xs text-slate-500 mt-1">bg-white/10 backdrop-blur<br/>Glassmorphism</p>
+        </div>
+
+        <!-- Swatch 9 -->
+        <div class="gv-animate-on-scroll delay-350">
+          <div class="h-32 rounded-xl bg-slate-900 shadow-md border border-slate-200 mb-4 flex items-center justify-center text-white text-3xl font-display">Aa</div>
+          <h3 class="text-sm font-semibold text-slate-900">Text Primary</h3>
+          <p class="font-mono text-xs text-slate-500 mt-1">text-slate-900<br/>#0f172a</p>
+        </div>
+
+        <!-- Swatch 10 -->
+        <div class="gv-animate-on-scroll delay-350">
+          <div class="h-32 rounded-xl bg-slate-500 shadow-md border border-slate-200 mb-4 flex items-center justify-center text-white text-3xl font-body">Aa</div>
+          <h3 class="text-sm font-semibold text-slate-900">Text Secondary</h3>
+          <p class="font-mono text-xs text-slate-500 mt-1">text-slate-500<br/>#64748b</p>
+        </div>
+
+        <!-- Swatch 11 -->
+        <div class="gv-animate-on-scroll delay-350">
+          <div class="h-32 rounded-xl border border-slate-200 bg-white shadow-sm mb-4"></div>
+          <h3 class="text-sm font-semibold text-slate-900">Border Standard</h3>
+          <p class="font-mono text-xs text-slate-500 mt-1">border-slate-200<br/>#e2e8f0</p>
+        </div>
+
+        <!-- Swatch 12 -->
+        <div class="gv-animate-on-scroll delay-350">
+          <div class="h-32 rounded-xl border border-brand-steel/30 bg-brand-steel/5 shadow-sm mb-4"></div>
+          <h3 class="text-sm font-semibold text-slate-900">Border Steel / Accent Focus</h3>
+          <p class="font-mono text-xs text-slate-500 mt-1">border-brand-steel/30</p>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ============================================== -->
+    <!-- SEÇÃO 3: COMPONENTES                           -->
+    <!-- ============================================== -->
+    <section id="components" class="section-card dark p-8 md:p-16 lg:p-24">
+      <div class="mb-16 gv-animate-on-scroll">
+        <h2 class="text-3xl font-body font-semibold tracking-tight text-white mb-2">Componentes</h2>
+        <p class="text-slate-400 font-body">Elementos de UI interativos. Teste o hover em todos eles.</p>
+      </div>
+
+      <div class="space-y-16">
+        
+        <!-- Botão Primário c/ Animação -->
+        <div class="gv-animate-on-scroll delay-100">
+          <p class="text-xs font-label uppercase tracking-widest text-slate-500 mb-6">1. Primary Button (Shimmer + Particles)</p>
+          <button class="gv-btn-primary inline-flex items-center justify-center gap-2 bg-brand-navy text-white px-8 py-4 rounded-full text-sm font-semibold shadow-glow hover:scale-105 transition-transform duration-300 group">
+            <span class="relative z-10 flex items-center gap-2">Entrar em Contato <i data-lucide="arrow-right" class="w-4 h-4 group-hover:translate-x-1 transition-transform"></i></span>
+            <span class="gv-particle" style="left: 15%; animation-duration: 1.8s; animation-delay: 0.2s;"></span>
+            <span class="gv-particle" style="left: 35%; animation-duration: 2.2s; animation-delay: 0.5s;"></span>
+            <span class="gv-particle" style="left: 60%; animation-duration: 2.0s; animation-delay: 0.1s;"></span>
+            <span class="gv-particle" style="left: 85%; animation-duration: 2.5s; animation-delay: 0.4s;"></span>
+          </button>
+        </div>
+
+        <!-- Glass Button com borda animada -->
+        <div class="gv-animate-on-scroll delay-100">
+          <p class="text-xs font-label uppercase tracking-widest text-slate-500 mb-6">2. Glass Button (Conic Border Spin)</p>
+          <div class="relative inline-block overflow-hidden rounded-full p-[1.5px] group cursor-pointer">
+            <!-- Borda animada girando -->
+            <div class="absolute inset-[-100%] w-[300%] h-[300%] animate-[spin_4s_linear_infinite]" style="background: conic-gradient(from 0deg, transparent 0deg, transparent 80deg, rgba(128,144,168,0.9) 180deg, transparent 280deg, transparent 360deg);"></div>
+            <!-- Fundo interno -->
+            <div class="absolute inset-[1.5px] bg-surface-dark rounded-full backdrop-blur-xl group-hover:bg-surface-dark/90 transition-colors"></div>
+            <!-- Conteúdo -->
+            <div class="relative z-10 px-6 py-3 flex items-center gap-3 text-white text-sm font-semibold group-hover:scale-[1.02] transition-transform">
+              <div class="w-6 h-6 rounded-full bg-gradient-to-br from-brand-navy to-brand-darkbg flex items-center justify-center shadow-inner"><i data-lucide="shield" class="w-3 h-3 text-brand-steel"></i></div>
+              Consultoria Jurídica
+            </div>
+          </div>
+        </div>
+
+        <!-- Navigation Links -->
+        <div class="gv-animate-on-scroll delay-100">
+          <p class="text-xs font-label uppercase tracking-widest text-slate-500 mb-6">3. Navigation Links</p>
+          <div class="flex flex-wrap items-center gap-8 bg-white/5 p-6 rounded-xl border border-white/10 w-fit">
+            <a href="#" class="text-xs font-label uppercase tracking-widest text-slate-400 hover:text-white transition-colors">Default Link</a>
+            <a href="#" class="text-xs font-label uppercase tracking-widest text-brand-steel">Active Link</a>
+            <a href="#" class="text-sm font-body font-medium text-slate-400 hover:text-white transition-colors">Secondary Standard</a>
+          </div>
+        </div>
+
+        <!-- Step Item -->
+        <div class="gv-animate-on-scroll delay-200">
+          <p class="text-xs font-label uppercase tracking-widest text-slate-500 mb-6">4. Step Items</p>
+          <div class="flex flex-col gap-4 max-w-sm">
+            <!-- Ativo -->
+            <div class="flex items-center gap-4 bg-white/5 rounded-xl p-4 shadow-xl backdrop-blur-md border border-brand-steel/30 -translate-x-2 transition-transform">
+              <div class="w-8 h-8 rounded-full bg-brand-navy text-white flex items-center justify-center font-bold text-xs shadow-glow">1</div>
+              <div class="flex-1">
+                <p class="text-sm font-semibold text-white">Diagnóstico Inicial</p>
+                <p class="text-xs text-slate-400">Analisamos sua demanda jurídica</p>
+              </div>
+              <i data-lucide="check-circle-2" class="w-5 h-5 text-brand-steel"></i>
+            </div>
+            <!-- Inativo -->
+            <div class="flex items-center gap-4 p-4 rounded-xl hover:bg-white/5 group transition-colors cursor-pointer border border-transparent hover:border-white/10">
+              <div class="w-8 h-8 rounded-full bg-white/10 text-slate-400 flex items-center justify-center font-bold text-xs group-hover:bg-brand-steel/20 group-hover:text-brand-steel transition-colors">2</div>
+              <div class="flex-1">
+                <p class="text-sm font-semibold text-slate-400 group-hover:text-white transition-colors">Estratégia Jurídica</p>
+              </div>
+              <i data-lucide="arrow-right" class="w-5 h-5 text-slate-600 opacity-0 group-hover:opacity-100 transition-opacity"></i>
+            </div>
+          </div>
+        </div>
+
+        <!-- Formulário -->
+        <div class="gv-animate-on-scroll delay-200">
+          <p class="text-xs font-label uppercase tracking-widest text-slate-500 mb-6">5. Form Fields & States</p>
+          <form class="max-w-md space-y-5 bg-surface-dark border border-slate-700/50 p-8 rounded-2xl shadow-2xl relative overflow-hidden" onsubmit="event.preventDefault();">
+            <!-- Beam decoration on form -->
+            <div class="absolute inset-0 pointer-events-none opacity-20"><div class="gv-beam gv-beam-1" style="left: 10%;"></div><div class="gv-beam gv-beam-2" style="right: 10%;"></div></div>
+            
+            <div>
+              <label class="block text-[10px] font-label font-bold uppercase tracking-widest text-slate-400 mb-2">Standard Input</label>
+              <input type="text" class="w-full bg-slate-900/50 border border-slate-700 rounded-xl px-4 py-3 text-white placeholder-slate-500 focus:outline-none focus:border-brand-navy focus:ring-1 focus:ring-brand-navy transition-all" placeholder="Seu nome" />
+            </div>
+            
+            <div>
+              <label class="block text-[10px] font-label font-bold uppercase tracking-widest text-slate-400 mb-2">Error State</label>
+              <input type="email" class="w-full bg-slate-900/50 border border-red-500/50 rounded-xl px-4 py-3 text-white placeholder-slate-500 focus:outline-none focus:border-red-500 focus:ring-1 focus:ring-red-500 transition-all" value="email_invalido.com" />
+              <p class="text-xs text-red-400 mt-1 flex items-center gap-1"><i data-lucide="alert-circle" class="w-3 h-3"></i> Insira um e-mail válido</p>
+            </div>
+
+            <button type="button" id="demo-btn-loading" class="w-full bg-brand-navy text-white font-semibold py-3.5 rounded-xl hover:bg-brand-navyhover transition-all flex items-center justify-center gap-2 mt-4 relative overflow-hidden">
+              <span class="btn-text">Enviar Dados</span>
+              <i data-lucide="send" class="w-4 h-4 btn-icon"></i>
+            </button>
+          </form>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ============================================== -->
+    <!-- SEÇÃO 4: LAYOUT & ESPAÇAMENTO                  -->
+    <!-- ============================================== -->
+    <section id="layout" class="section-card p-8 md:p-16 lg:p-24 bg-white">
+      <div class="mb-16 gv-animate-on-scroll">
+        <h2 class="text-3xl font-body font-semibold tracking-tight text-slate-900 mb-2">Layout & Espaçamento</h2>
+        <p class="text-slate-500 font-body">Proporções e escalas que governam o ritmo da página.</p>
+      </div>
+
+      <div class="space-y-16">
+        <!-- 1. Grid 12 Colunas -->
+        <div class="gv-animate-on-scroll delay-100">
+          <p class="text-xs font-label uppercase tracking-widest text-slate-500 mb-6">Grid de 12 Colunas (Visualização)</p>
+          <div class="grid grid-cols-12 gap-4 h-32 border border-slate-200 bg-slate-50 p-4 rounded-xl">
+            <!-- 12 colunas renderizadas -->
+            <div class="bg-brand-navy/10 border border-brand-navy/20 rounded"></div>
+            <div class="bg-brand-navy/10 border border-brand-navy/20 rounded"></div>
+            <div class="bg-brand-navy/10 border border-brand-navy/20 rounded"></div>
+            <div class="bg-brand-navy/10 border border-brand-navy/20 rounded"></div>
+            <div class="bg-brand-navy/10 border border-brand-navy/20 rounded"></div>
+            <div class="bg-brand-navy/10 border border-brand-navy/20 rounded"></div>
+            <div class="bg-brand-navy/10 border border-brand-navy/20 rounded"></div>
+            <div class="bg-brand-navy/10 border border-brand-navy/20 rounded"></div>
+            <div class="bg-brand-navy/10 border border-brand-navy/20 rounded"></div>
+            <div class="bg-brand-navy/10 border border-brand-navy/20 rounded"></div>
+            <div class="bg-brand-navy/10 border border-brand-navy/20 rounded"></div>
+            <div class="bg-brand-navy/10 border border-brand-navy/20 rounded"></div>
+          </div>
+        </div>
+
+        <!-- 2. Split Layout -->
+        <div class="gv-animate-on-scroll delay-100">
+          <p class="text-xs font-label uppercase tracking-widest text-slate-500 mb-6">Split Layout (Hero Padrão 60/40)</p>
+          <div class="flex flex-col lg:flex-row gap-8 h-48 border border-slate-200 bg-slate-50 p-4 rounded-xl">
+            <div class="w-full lg:w-[60%] bg-slate-200 rounded border border-slate-300 flex items-center justify-center text-slate-500 text-sm">60% Conteúdo</div>
+            <div class="w-full lg:w-[40%] bg-brand-darkbg rounded border border-brand-navy flex items-center justify-center text-white text-sm">40% Foto / Visual</div>
+          </div>
+        </div>
+
+        <!-- 3. Escala de Espaçamento -->
+        <div class="gv-animate-on-scroll delay-200">
+          <p class="text-xs font-label uppercase tracking-widest text-slate-500 mb-6">Spacing Scale</p>
+          <div class="flex items-end gap-6">
+            <div class="flex flex-col items-center gap-2"><div class="w-4 h-4 bg-brand-navy rounded"></div><span class="text-xs font-mono text-slate-500">16px (gap-4)</span></div>
+            <div class="flex flex-col items-center gap-2"><div class="w-6 h-6 bg-brand-navy rounded"></div><span class="text-xs font-mono text-slate-500">24px (gap-6)</span></div>
+            <div class="flex flex-col items-center gap-2"><div class="w-8 h-8 bg-brand-navy rounded"></div><span class="text-xs font-mono text-slate-500">32px (gap-8)</span></div>
+            <div class="flex flex-col items-center gap-2"><div class="w-12 h-12 bg-brand-navy rounded"></div><span class="text-xs font-mono text-slate-500">48px (gap-12)</span></div>
+            <div class="flex flex-col items-center gap-2"><div class="w-16 h-16 bg-brand-navy rounded"></div><span class="text-xs font-mono text-slate-500">64px (gap-16)</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================== -->
+    <!-- SEÇÃO 5: MOTION & INTERACTION                  -->
+    <!-- ============================================== -->
+    <section id="motion" class="section-card p-8 md:p-16 lg:p-24 bg-slate-50">
+      <div class="mb-16 gv-animate-on-scroll">
+        <h2 class="text-3xl font-body font-semibold tracking-tight text-slate-900 mb-2">Motion & Interaction</h2>
+        <p class="text-slate-500 font-body">Padrões de animação de página, texto e micro-interações rodando ao vivo. Todas as animações de texto ativam ao entrar na viewport.</p>
+      </div>
+
+      <div class="mb-16">
+        <p class="text-xs font-label uppercase tracking-widest text-slate-400 mb-8 pb-2 border-b border-slate-200">Animações de Texto</p>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+
+          <div class="gv-animate-on-scroll delay-100">
+            <p class="text-xs font-label uppercase tracking-widest text-slate-500 mb-4">1. Clip Reveal (H1 Hero)</p>
+            <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm min-h-[120px] flex items-center">
+              <h3 class="text-4xl font-display font-bold text-slate-900 leading-tight gv-clip-on-scroll">
+                Assessoria<br/>Jurídica
+              </h3>
+            </div>
+            <p class="text-xs text-slate-400 font-label mt-3">Classe: <code class="bg-slate-100 px-1 rounded">gv-clip-on-scroll</code> — texto entra varrendo da esquerda como uma cortina.</p>
+          </div>
+
+          <div class="gv-animate-on-scroll delay-200">
+            <p class="text-xs font-label uppercase tracking-widest text-slate-500 mb-4">2. Word Up Reveal (H4 Cards)</p>
+            <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm min-h-[120px] flex items-center">
+              <h3 class="text-3xl font-display font-semibold text-slate-900 leading-snug">
+                <span class="wallach-word-mask"><span class="wallach-word delay-100">Direito</span></span>&nbsp;
+                <span class="wallach-word-mask"><span class="wallach-word delay-200">Empresarial</span></span>&nbsp;
+                <span class="wallach-word-mask"><span class="wallach-word delay-350">e Contratos</span></span>
+              </h3>
+            </div>
+            <p class="text-xs text-slate-400 font-label mt-3">Cada palavra sobe individualmente com delay escalonado — ideal para títulos de seção.</p>
+          </div>
+
+          <div class="gv-animate-on-scroll delay-350">
+            <p class="text-xs font-label uppercase tracking-widest text-slate-500 mb-4">3. Spacing Expand (H2 Seções)</p>
+            <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm min-h-[120px] flex items-center">
+              <h3 class="text-3xl font-display font-semibold text-slate-900 leading-tight wallach-spacing">
+                Duas Décadas<br/>de Excelência
+              </h3>
+            </div>
+            <p class="text-xs text-slate-400 font-label mt-3">Letra-espaçamento abre elegantemente junto com o fade-in — sofisticado para títulos principais.</p>
+          </div>
+
+          <div class="gv-animate-on-scroll delay-100">
+            <p class="text-xs font-label uppercase tracking-widest text-slate-500 mb-4">4. Fade da Esquerda (Colunas de Texto)</p>
+            <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm min-h-[120px] flex flex-col justify-center gap-3">
+              <h4 class="text-xl font-display font-semibold text-slate-900 wallach-fade-left">Recuperação Judicial</h4>
+              <p class="text-sm text-slate-500 font-body wallach-fade-left delay-200">Assessoria especializada com foco na preservação da empresa e dos empregos.</p>
+            </div>
+            <p class="text-xs text-slate-400 font-label mt-3">Classe: <code class="bg-slate-100 px-1 rounded">wallach-fade-left</code> — para colunas de texto em layouts 60/40.</p>
+          </div>
+
+          <div class="gv-animate-on-scroll delay-200">
+            <p class="text-xs font-label uppercase tracking-widest text-slate-500 mb-4">5. Fade da Direita (Colunas Visuais)</p>
+            <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm min-h-[120px] flex items-center justify-center">
+              <div class="w-20 h-20 rounded-2xl bg-brand-navy flex items-center justify-center text-brand-steel wallach-fade-right">
+                <i data-lucide="scale" class="w-10 h-10"></i>
+              </div>
+            </div>
+            <p class="text-xs text-slate-400 font-label mt-3">Classe: <code class="bg-slate-100 px-1 rounded">wallach-fade-right</code> — para elementos visuais em layouts 60/40.</p>
+          </div>
+
+          <div class="gv-animate-on-scroll delay-350">
+            <p class="text-xs font-label uppercase tracking-widest text-slate-500 mb-4">6. Shimmer Sweep (Citações)</p>
+            <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm min-h-[120px] flex items-center">
+              <p class="text-2xl font-display italic leading-snug wallach-shimmer-text">
+                "Excelência em cada caso."
+              </p>
+            </div>
+            <p class="text-xs text-slate-400 font-label mt-3">Luz varrendo suavemente — reservado para citações em destaque e pull quotes.</p>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="mb-16">
+        <p class="text-xs font-label uppercase tracking-widest text-slate-400 mb-8 pb-2 border-b border-slate-200">Animações de Interface</p>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+
+          <div class="gv-animate-on-scroll delay-100">
+            <p class="text-xs font-label uppercase tracking-widest text-slate-500 mb-4">7. Hover Tilt 3D (Cards de Área)</p>
+            <div class="hover-tilt-3d bg-white p-8 rounded-2xl border border-slate-200 shadow-sm transition-shadow duration-300 hover:shadow-cardhover cursor-pointer" style="transform-style: preserve-3d;">
+              <div class="w-12 h-12 bg-brand-navy rounded-xl flex items-center justify-center text-brand-steel mb-6" style="transform: translateZ(20px);">
+                <i data-lucide="briefcase" class="w-6 h-6"></i>
+              </div>
+              <h3 class="text-xl font-semibold text-slate-900 mb-2" style="transform: translateZ(10px);">Direito Empresarial</h3>
+              <p class="text-slate-500 text-sm leading-relaxed" style="transform: translateZ(5px);">Passe o mouse para sentir a profundidade 3D aplicada em todos os cards.</p>
+            </div>
+          </div>
+
+          <div class="gv-animate-on-scroll delay-200">
+            <p class="text-xs font-label uppercase tracking-widest text-slate-500 mb-4">8. Number Counter (Stats)</p>
+            <div class="bg-surface-dark p-8 rounded-2xl border border-slate-700/50 shadow-2xl flex flex-col items-center justify-center text-center h-full gap-6">
+              <div class="text-center">
+                <span class="text-5xl font-display font-bold text-brand-steel mb-1 block number-counter" data-target="20" data-suffix="+">0</span>
+                <p class="text-slate-400 text-xs font-label uppercase tracking-widest">Anos de Experiência</p>
+              </div>
+              <div class="w-px h-8 bg-white/10"></div>
+              <div class="text-center">
+                <span class="text-5xl font-display font-bold text-brand-steel mb-1 block number-counter" data-target="5" data-suffix="">0</span>
+                <p class="text-slate-400 text-xs font-label uppercase tracking-widest">Estados de Atuação</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="gv-animate-on-scroll delay-350">
+            <p class="text-xs font-label uppercase tracking-widest text-slate-500 mb-4">9. Hover Lift & Underline Grow</p>
+            <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm h-full flex flex-col gap-4 justify-center">
+              <div class="hover:-translate-y-2 hover:border-brand-navy/40 hover:shadow-cardhover transition-all duration-300 border border-slate-200 rounded-xl p-4 cursor-pointer flex items-center gap-3">
+                <i data-lucide="arrow-up-right" class="w-5 h-5 text-brand-steel"></i>
+                <p class="font-semibold text-slate-900 text-sm">Elevação de Card</p>
+              </div>
+              <div>
+                <p class="text-sm font-label font-semibold text-brand-navy wallach-underline-grow">
+                  Link com Underline Animado
+                </p>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <div>
+        <p class="text-xs font-label uppercase tracking-widest text-slate-400 mb-8 pb-2 border-b border-slate-200">Stagger Grid (Cards entrando em cascata)</p>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+          <div class="bg-white border border-slate-200 rounded-xl p-5 shadow-sm gv-animate-on-scroll delay-100 text-center">
+            <i data-lucide="scale" class="w-6 h-6 text-brand-steel mx-auto mb-3"></i>
+            <p class="text-sm font-semibold text-slate-900 font-display">Card 1</p>
+            <p class="text-[11px] text-slate-400 mt-1">delay: 100ms</p>
+          </div>
+          <div class="bg-white border border-slate-200 rounded-xl p-5 shadow-sm gv-animate-on-scroll delay-200 text-center">
+            <i data-lucide="briefcase" class="w-6 h-6 text-brand-steel mx-auto mb-3"></i>
+            <p class="text-sm font-semibold text-slate-900 font-display">Card 2</p>
+            <p class="text-[11px] text-slate-400 mt-1">delay: 200ms</p>
+          </div>
+          <div class="bg-white border border-slate-200 rounded-xl p-5 shadow-sm gv-animate-on-scroll delay-350 text-center">
+            <i data-lucide="building-2" class="w-6 h-6 text-brand-steel mx-auto mb-3"></i>
+            <p class="text-sm font-semibold text-slate-900 font-display">Card 3</p>
+            <p class="text-[11px] text-slate-400 mt-1">delay: 350ms</p>
+          </div>
+          <div class="bg-white border border-slate-200 rounded-xl p-5 shadow-sm gv-animate-on-scroll delay-500 text-center">
+            <i data-lucide="users" class="w-6 h-6 text-brand-steel mx-auto mb-3"></i>
+            <p class="text-sm font-semibold text-slate-900 font-display">Card 4</p>
+            <p class="text-[11px] text-slate-400 mt-1">delay: 500ms</p>
+          </div>
+        </div>
+        <p class="text-xs text-slate-400 font-label mt-4">Use <code class="bg-slate-100 px-1 rounded">gv-animate-on-scroll</code> + classes <code class="bg-slate-100 px-1 rounded">delay-100</code> a <code class="bg-slate-100 px-1 rounded">delay-500</code> em sequência para o efeito cascata.</p>
+      </div>
+    </section>
+
+    <!-- ============================================== -->
+    <!-- SEÇÃO 6: ÍCONES                                -->
+    <!-- ============================================== -->
+    <section id="icons" class="section-card dark p-8 md:p-16 lg:p-24">
+      <div class="mb-16 gv-animate-on-scroll">
+        <h2 class="text-3xl font-body font-semibold tracking-tight text-white mb-2">Iconografia</h2>
+        <p class="text-slate-400 font-body">Biblioteca Lucide. Stroke-width padronizado em 1.5.</p>
+      </div>
+
+      <!-- Tamanhos e Cores -->
+      <div class="flex flex-col md:flex-row gap-16 mb-16 gv-animate-on-scroll delay-100">
+        <div>
+          <p class="text-xs font-label uppercase tracking-widest text-slate-500 mb-6">Escala de Tamanhos</p>
+          <div class="flex items-end gap-6 text-white">
+            <div class="flex flex-col items-center gap-2"><i data-lucide="shield" class="w-3 h-3"></i><span class="text-[10px] font-mono text-slate-500">12px</span></div>
+            <div class="flex flex-col items-center gap-2"><i data-lucide="shield" class="w-4 h-4"></i><span class="text-[10px] font-mono text-slate-500">16px</span></div>
+            <div class="flex flex-col items-center gap-2"><i data-lucide="shield" class="w-5 h-5"></i><span class="text-[10px] font-mono text-slate-500">20px</span></div>
+            <div class="flex flex-col items-center gap-2"><i data-lucide="shield" class="w-6 h-6"></i><span class="text-[10px] font-mono text-slate-500">24px</span></div>
+          </div>
+        </div>
+        
+        <div>
+          <p class="text-xs font-label uppercase tracking-widest text-slate-500 mb-6">Aplicações de Cor</p>
+          <div class="flex items-end gap-8">
+            <div class="flex flex-col items-center gap-2"><i data-lucide="shield" class="w-6 h-6 text-white"></i><span class="text-[10px] font-mono text-slate-500">Light</span></div>
+            <div class="flex flex-col items-center gap-2"><i data-lucide="shield" class="w-6 h-6 text-brand-steel"></i><span class="text-[10px] font-mono text-slate-500">Accent</span></div>
+            <div class="flex flex-col items-center gap-2"><i data-lucide="shield" class="w-6 h-6 text-brand-navy"></i><span class="text-[10px] font-mono text-slate-500">Brand</span></div>
+            <div class="flex flex-col items-center gap-2"><i data-lucide="shield" class="w-6 h-6 text-slate-500"></i><span class="text-[10px] font-mono text-slate-500">Muted</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Set Jurídico -->
+      <div class="gv-animate-on-scroll delay-200">
+        <p class="text-xs font-label uppercase tracking-widest text-slate-500 mb-6">Set Jurídico (Essenciais)</p>
+        <div class="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-8 gap-8 text-white">
+          <div class="flex flex-col items-center gap-3"><i data-lucide="scale" class="w-6 h-6 text-brand-steel"></i><span class="text-[10px] font-mono text-slate-400">scale</span></div>
+          <div class="flex flex-col items-center gap-3"><i data-lucide="briefcase" class="w-6 h-6 text-brand-steel"></i><span class="text-[10px] font-mono text-slate-400">briefcase</span></div>
+          <div class="flex flex-col items-center gap-3"><i data-lucide="building-2" class="w-6 h-6 text-brand-steel"></i><span class="text-[10px] font-mono text-slate-400">building-2</span></div>
+          <div class="flex flex-col items-center gap-3"><i data-lucide="receipt" class="w-6 h-6 text-brand-steel"></i><span class="text-[10px] font-mono text-slate-400">receipt</span></div>
+          <div class="flex flex-col items-center gap-3"><i data-lucide="gavel" class="w-6 h-6 text-brand-steel"></i><span class="text-[10px] font-mono text-slate-400">gavel</span></div>
+          <div class="flex flex-col items-center gap-3"><i data-lucide="shield-check" class="w-6 h-6 text-brand-steel"></i><span class="text-[10px] font-mono text-slate-400">shield-chk</span></div>
+          <div class="flex flex-col items-center gap-3"><i data-lucide="users" class="w-6 h-6 text-brand-steel"></i><span class="text-[10px] font-mono text-slate-400">users</span></div>
+          <div class="flex flex-col items-center gap-3"><i data-lucide="credit-card" class="w-6 h-6 text-brand-steel"></i><span class="text-[10px] font-mono text-slate-400">credit-card</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================== -->
+    <!-- SEÇÃO 6.5: TRATAMENTO DE FOTOS                 -->
+    <!-- ============================================== -->
+    <section id="photos" class="section-card dark p-8 md:p-16 lg:p-24">
+      <div class="mb-12 gv-animate-on-scroll">
+        <h2 class="text-3xl font-body font-semibold tracking-tight text-white mb-2">Tratamento de Fotos</h2>
+        <p class="text-slate-400 font-body">Padrão visual para os cards de membros da equipe.</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 gv-animate-on-scroll delay-100">
+        
+        <!-- Card Armando Wallach -->
+        <div class="bg-surface-dark border border-slate-700/50 rounded-2xl overflow-hidden shadow-2xl">
+          <div class="aspect-[3/4] relative overflow-hidden">
+            <img src="assets/midia-wallach/armando-lemos-wallach.png" alt="Armando Lemos Wallach" class="w-full h-full object-cover object-top" />
+            <div class="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-surface-dark to-transparent"></div>
+          </div>
+          <div class="p-6">
+            <h3 class="text-2xl font-display font-semibold text-white mb-1">Armando Lemos Wallach</h3>
+            <p class="text-brand-steel text-sm font-label uppercase tracking-widest mb-3">Advogado Sócio</p>
+            <p class="text-[10px] font-label font-bold uppercase tracking-widest text-slate-500">OAB/PE 21.669 | OAB/SP 421.826</p>
+            <div class="flex flex-wrap gap-2 mt-4">
+              <span class="text-[10px] px-2 py-1 rounded-full border border-brand-steel/40 text-brand-steel font-label">Direito Empresarial</span>
+              <span class="text-[10px] px-2 py-1 rounded-full border border-brand-steel/40 text-brand-steel font-label">Recuperação Judicial</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card Kaio Albuquerque -->
+        <div class="bg-surface-dark border border-slate-700/50 rounded-2xl overflow-hidden shadow-2xl">
+          <div class="aspect-[3/4] relative overflow-hidden">
+            <img src="assets/midia-wallach/kaio-cesar-damasceno-de-albuquerque.png" alt="Kaio Cesar Damasceno de Albuquerque" class="w-full h-full object-cover object-top" />
+            <div class="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-surface-dark to-transparent"></div>
+          </div>
+          <div class="p-6">
+            <h3 class="text-2xl font-display font-semibold text-white mb-1">Kaio Cesar Damasceno de Albuquerque</h3>
+            <p class="text-brand-steel text-sm font-label uppercase tracking-widest mb-3">Advogado Sócio</p>
+            <p class="text-[10px] font-label font-bold uppercase tracking-widest text-slate-500">OAB/PE</p>
+            <div class="flex flex-wrap gap-2 mt-4">
+              <span class="text-[10px] px-2 py-1 rounded-full border border-brand-steel/40 text-brand-steel font-label">Direito Civil</span>
+              <span class="text-[10px] px-2 py-1 rounded-full border border-brand-steel/40 text-brand-steel font-label">Direito Imobiliário</span>
+              <span class="text-[10px] px-2 py-1 rounded-full border border-brand-steel/40 text-brand-steel font-label">Tributário</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="mt-10 bg-white/5 border border-white/10 rounded-xl p-6 gv-animate-on-scroll delay-200">
+        <p class="text-xs font-label uppercase tracking-widest text-slate-500 mb-4">Regras de uso das fotos</p>
+        <ul class="text-sm text-slate-400 font-body space-y-2">
+          <li class="flex items-start gap-2"><span class="text-brand-steel mt-1">→</span> Sempre usar <b>object-cover object-top</b> para manter o rosto centralizado.</li>
+          <li class="flex items-start gap-2"><span class="text-brand-steel mt-1">→</span> Aplicar gradiente <code class="text-slate-300">from-surface-dark to-transparent</code> no rodapé da foto para transição suave.</li>
+          <li class="flex items-start gap-2"><span class="text-brand-steel mt-1">→</span> Proporção padrão dos cards de equipe: <b>aspect-ratio 3/4</b> (retrato).</li>
+          <li class="flex items-start gap-2"><span class="text-brand-steel mt-1">→</span> Tags de especialidade: borda aço, texto aço, fundo transparente — nunca filled.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ============================================== -->
+    <!-- SEÇÃO 7: REGRAS                                -->
+    <!-- ============================================== -->
+    <section class="section-card p-8 md:p-16 lg:p-24 bg-white mb-24">
+      <div class="mb-12 gv-animate-on-scroll">
+        <h2 class="text-3xl font-body font-semibold tracking-tight text-slate-900 mb-2">Regras de Implementação</h2>
+      </div>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 text-sm gv-animate-on-scroll delay-100">
+        <!-- Fazer -->
+        <div class="border border-slate-100 rounded-2xl p-6 bg-slate-50">
+          <h3 class="font-semibold text-emerald-600 mb-4 flex items-center gap-2">
+            <i data-lucide="check-circle-2" class="w-5 h-5"></i> O que FAZER (Sempre)
+          </h3>
+          <ul class="space-y-4 text-slate-600">
+            <li class="flex items-start gap-2"><span class="w-1.5 h-1.5 rounded-full bg-emerald-500 mt-1.5 shrink-0"></span> Usar <b>Cormorant Garant</b> apenas para Display (H1/H2 e citações em destaque). Exige peso 500/600/700. Nunca use para parágrafos corridos.</li>
+            <li class="flex items-start gap-2"><span class="w-1.5 h-1.5 rounded-full bg-emerald-500 mt-1.5 shrink-0"></span> Usar <b>Lora</b> para todo o corpo de texto (parágrafos, descrições, leads). Transmite elegância e legibilidade.</li>
+            <li class="flex items-start gap-2"><span class="w-1.5 h-1.5 rounded-full bg-emerald-500 mt-1.5 shrink-0"></span> O <b>azul-marinho #1C2E5C</b> é a cor primária — use para botões, títulos sobre fundo claro e links ativos.</li>
+            <li class="flex items-start gap-2"><span class="w-1.5 h-1.5 rounded-full bg-emerald-500 mt-1.5 shrink-0"></span> O <b>cinza-aço #8090A8</b> é o único acento da paleta — use para ícones, labels, bordas de destaque e elementos secundários.</li>
+            <li class="flex items-start gap-2"><span class="w-1.5 h-1.5 rounded-full bg-emerald-500 mt-1.5 shrink-0"></span> Aplicar <code class="text-slate-800 bg-white px-1 rounded">prefers-reduced-motion</code> no CSS global para desativar animações complexas se o usuário solicitar.</li>
+            <li class="flex items-start gap-2"><span class="w-1.5 h-1.5 rounded-full bg-emerald-500 mt-1.5 shrink-0"></span> Manter área de clique mínima de <b>48x48px</b> em botões mobile.</li>
+            <li class="flex items-start gap-2"><span class="w-1.5 h-1.5 rounded-full bg-emerald-500 mt-1.5 shrink-0"></span> Intercalar seções claras com seções dark (<code class="text-slate-800 bg-white px-1 rounded">.section-card.dark</code>) para criar ritmo visual sem perder a sobriedade institucional.</li>
+          </ul>
+        </div>
+        
+        <!-- Não Fazer -->
+        <div class="border border-slate-100 rounded-2xl p-6 bg-slate-50">
+          <h3 class="font-semibold text-red-600 mb-4 flex items-center gap-2">
+            <i data-lucide="x-circle" class="w-5 h-5"></i> O que NÃO FAZER (Nunca)
+          </h3>
+          <ul class="space-y-4 text-slate-600">
+            <li class="flex items-start gap-2"><span class="w-1.5 h-1.5 rounded-full bg-red-500 mt-1.5 shrink-0"></span> <b>Nunca usar dourado ou amarelo</b> em nenhum elemento. A paleta Wallach é navy + aço + branco. Nenhuma cor vibrante.</li>
+            <li class="flex items-start gap-2"><span class="w-1.5 h-1.5 rounded-full bg-red-500 mt-1.5 shrink-0"></span> Nunca remover o <code class="text-slate-800 bg-white px-1 rounded">border-radius: 1.5rem</code> nem grudar a <code class="text-slate-800 bg-white px-1 rounded">.section-card</code> na borda da tela no Desktop. O fundo escuro <code class="text-slate-800 bg-white px-1 rounded">#0D1829</code> deve sempre aparecer nas laterais.</li>
+            <li class="flex items-start gap-2"><span class="w-1.5 h-1.5 rounded-full bg-red-500 mt-1.5 shrink-0"></span> Nunca aplicar <code class="text-slate-800 bg-white px-1 rounded">gv-fade-slide-in</code> em todos os elementos simultaneamente. Use as classes <code class="text-slate-800 bg-white px-1 rounded">.delay-*</code> para criar staggering visual.</li>
+            <li class="flex items-start gap-2"><span class="w-1.5 h-1.5 rounded-full bg-red-500 mt-1.5 shrink-0"></span> Nunca usar verde, vermelho ou outras cores vibrantes fora dos estados de sucesso/erro em formulários.</li>
+            <li class="flex items-start gap-2"><span class="w-1.5 h-1.5 rounded-full bg-red-500 mt-1.5 shrink-0"></span> Nunca usar Cormorant Garant em peso abaixo de 400 em telas pequenas — a fonte fica ilegível em tamanhos pequenos com peso leve.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <a href="tel:+558130883317" class="fixed bottom-6 right-6 z-[100] w-14 h-14 bg-brand-navy rounded-full flex items-center justify-center text-white shadow-[0_0_20px_rgba(28,46,92,0.5)] hover:scale-110 hover:-translate-y-1 transition-all duration-300" title="Ligar para a Wallach">
+    <i data-lucide="phone" class="w-6 h-6"></i>
+  </a>
+
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script>
+    // Inicialização do Lucide com Stroke 1.5
+    lucide.createIcons({
+      attrs: { 'stroke-width': 1.5 }
+    });
+
+    // 1. Scroll Reveal Animation
+    const observerOptions = {
+      root: null,
+      rootMargin: '0px 0px -10% 0px',
+      threshold: 0.15
+    };
+
+    const observer = new IntersectionObserver((entries, observer) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+        }
+      });
+    }, observerOptions);
+
+    document.querySelectorAll('.gv-animate-on-scroll, .gv-clip-on-scroll').forEach(el => {
+      observer.observe(el);
+    });
+
+    const wallachObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+        }
+      });
+    }, { rootMargin: '0px 0px -10% 0px', threshold: 0.15 });
+
+    document.querySelectorAll('.wallach-spacing, .wallach-fade-left, .wallach-fade-right, .wallach-underline-grow').forEach(el => {
+      wallachObserver.observe(el);
+    });
+
+    const wordObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.querySelectorAll('.wallach-word').forEach(word => {
+            word.classList.add('is-visible');
+          });
+        }
+      });
+    }, { rootMargin: '0px 0px -10% 0px', threshold: 0.2 });
+
+    document.querySelectorAll('h3, h4').forEach(el => {
+      if (el.querySelector('.wallach-word')) {
+        wordObserver.observe(el);
+      }
+    });
+
+    // 2. Card Stack 3D Animation (Rotacionar ao clicar)
+    const stackContainers = document.querySelectorAll('.card-stack-container');
+    stackContainers.forEach(container => {
+      let items = Array.from(container.querySelectorAll('.card-stack-item'));
+      container.addEventListener('click', () => {
+        // Pega o do topo (último no array pela lógica Z-index natural se não houver z-index, 
+        // mas aqui definimos z-index explicito. O topo é o index 2 no array inicial.)
+        const topItem = items.pop();
+        items.unshift(topItem); // Coloca no fundo
+
+        items.forEach((item, index) => {
+          if(index === 0) {
+            item.style.transform = 'translateY(24px) scale(0.9)';
+            item.style.opacity = '0.4';
+            item.style.zIndex = '10';
+          } else if (index === 1) {
+            item.style.transform = 'translateY(12px) scale(0.95)';
+            item.style.opacity = '0.6';
+            item.style.zIndex = '20';
+          } else {
+            item.style.transform = 'translateY(0) scale(1)';
+            item.style.opacity = '1';
+            item.style.zIndex = '30';
+          }
+        });
+      });
+    });
+
+    // 3. Hover Tilt 3D
+    const tiltCards = document.querySelectorAll('.hover-tilt-3d');
+    tiltCards.forEach(card => {
+      card.addEventListener('mousemove', (e) => {
+        const rect = card.getBoundingClientRect();
+        const x = (e.clientX - rect.left) / rect.width - 0.5;
+        const y = (e.clientY - rect.top) / rect.height - 0.5;
+        card.style.transform = `perspective(800px) rotateY(${x * 10}deg) rotateX(${-y * 10}deg) translateZ(10px)`;
+      });
+      card.addEventListener('mouseleave', () => {
+        card.style.transform = 'perspective(800px) rotateY(0) rotateX(0) translateZ(0)';
+      });
+    });
+
+    // 4. Number Counter on Scroll
+    const counterObserver = new IntersectionObserver((entries, observer) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const el = entry.target;
+          if(el.dataset.animated) return;
+          el.dataset.animated = "true";
+          
+          const target = parseInt(el.dataset.target);
+          const duration = 2000;
+          const step = target / (duration / 16);
+          let current = 0;
+          
+          const timer = setInterval(() => {
+            current += step;
+            if (current >= target) { 
+              current = target; 
+              clearInterval(timer); 
+            }
+            el.textContent = Math.floor(current).toLocaleString('pt-BR') + (el.dataset.suffix || '');
+          }, 16);
+          
+          observer.unobserve(el);
+        }
+      });
+    });
+    document.querySelectorAll('.number-counter').forEach(el => counterObserver.observe(el));
+
+    // 5. Botão Submit Demo
+    const btnLoading = document.getElementById('demo-btn-loading');
+    if(btnLoading) {
+      btnLoading.addEventListener('click', () => {
+        btnLoading.classList.add('opacity-80', 'cursor-wait');
+        btnLoading.innerHTML = '<i data-lucide="loader-2" class="w-4 h-4 animate-spin"></i> Enviando...';
+        lucide.createIcons();
+        
+        setTimeout(() => {
+          btnLoading.classList.remove('opacity-80', 'cursor-wait');
+          btnLoading.classList.replace('bg-brand-navy', 'bg-green-500');
+          btnLoading.innerHTML = '<i data-lucide="check" class="w-4 h-4"></i> Sucesso!';
+          lucide.createIcons();
+        }, 2000);
+      });
+    }
+  </script>
+</body>
+</html>

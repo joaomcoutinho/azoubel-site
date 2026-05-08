@@ -1,0 +1,1271 @@
+<!DOCTYPE html>
+<html class="light" lang="pt-br" style="color-scheme: light;">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Moura Dubeux — Design System</title>
+
+  <!-- Same CSS assets as the original -->
+  <link rel="stylesheet" href="assets/d670c2261b7e5be3_642574c3e7f84183.css" />
+  <link rel="stylesheet" href="assets/2845d2c65127e4fc_fa16f94802916e3a.css" />
+  <link rel="stylesheet" href="assets/b9eb96dfa7880486_css2.css" />
+
+  <style>
+    /* ── Design System page-specific styles ── */
+    :root {
+      --ds-gap: 2rem;
+      --ds-section-pad: 5.5rem 2rem;
+    }
+
+    /* Sticky top nav override for DS nav */
+    .ds-topnav {
+      position: sticky;
+      top: 0;
+      z-index: 200;
+      background: #fff;
+      border-bottom: 1px solid hsl(var(--border));
+      padding: 0 2rem;
+      display: flex;
+      align-items: center;
+      gap: 0;
+      height: 52px;
+      overflow-x: auto;
+      white-space: nowrap;
+      scrollbar-width: none;
+    }
+    .ds-topnav::-webkit-scrollbar { display: none; }
+    .ds-topnav a {
+      font-size: 13px;
+      font-weight: 500;
+      color: hsl(var(--text-secondary));
+      text-decoration: none;
+      padding: 0 1rem;
+      height: 100%;
+      display: inline-flex;
+      align-items: center;
+      border-bottom: 2px solid transparent;
+      transition: all 0.2s ease;
+    }
+    .ds-topnav a:hover {
+      color: hsl(var(--primary));
+      border-bottom-color: hsl(var(--primary));
+    }
+    .ds-topnav .ds-brand {
+      font-weight: 700;
+      color: hsl(var(--primary));
+      margin-right: 1.5rem;
+      font-size: 14px;
+      flex-shrink: 0;
+    }
+
+    /* DS Section wrapper */
+    .ds-section {
+      padding: var(--ds-section-pad);
+      border-bottom: 1px solid hsl(var(--border));
+    }
+    .ds-section:last-child { border-bottom: none; }
+
+    .ds-section-title {
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: hsl(var(--text-ternary));
+      margin-bottom: 3rem;
+    }
+
+    /* Typography table */
+    .ds-type-row {
+      display: flex;
+      align-items: baseline;
+      gap: 2rem;
+      padding: 1.5rem 0;
+      border-top: 1px solid hsl(var(--border));
+    }
+    .ds-type-label {
+      min-width: 160px;
+      font-size: 12px;
+      color: hsl(var(--text-ternary));
+      flex-shrink: 0;
+    }
+    .ds-type-spec {
+      margin-left: auto;
+      font-size: 12px;
+      color: hsl(var(--text-ternary));
+      flex-shrink: 0;
+      font-family: monospace;
+    }
+    .ds-type-preview { flex: 1; }
+
+    /* Color swatches */
+    .ds-swatches {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+    }
+    .ds-swatch {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      width: 120px;
+    }
+    .ds-swatch-box {
+      width: 120px;
+      height: 80px;
+      border-radius: 12px;
+      border: 1px solid rgba(0,0,0,0.08);
+    }
+    .ds-swatch-name {
+      font-size: 11px;
+      font-weight: 600;
+      color: hsl(var(--text-primary));
+    }
+    .ds-swatch-value {
+      font-size: 10px;
+      color: hsl(var(--text-ternary));
+      font-family: monospace;
+    }
+
+    /* Component rows */
+    .ds-component-row {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 1rem;
+      padding: 2rem 0;
+      border-top: 1px solid hsl(var(--border));
+    }
+    .ds-component-label {
+      font-size: 12px;
+      color: hsl(var(--text-ternary));
+      min-width: 120px;
+    }
+
+    /* Motion gallery */
+    .ds-motion-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      gap: 1.5rem;
+    }
+    .ds-motion-card {
+      border: 1px solid hsl(var(--border));
+      border-radius: 16px;
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
+      background: hsl(var(--background));
+    }
+    .ds-motion-demo {
+      width: 64px;
+      height: 64px;
+      border-radius: 16px;
+      background: hsl(var(--primary) / .12);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .ds-motion-name {
+      font-size: 12px;
+      font-weight: 600;
+      text-align: center;
+    }
+    .ds-motion-spec {
+      font-size: 11px;
+      color: hsl(var(--text-ternary));
+      text-align: center;
+      font-family: monospace;
+    }
+
+    /* Layout pattern demo */
+    .ds-layout-demo {
+      border: 1px solid hsl(var(--border));
+      border-radius: 16px;
+      padding: 1.5rem;
+      background: hsl(var(--muted));
+      margin-bottom: 1.5rem;
+    }
+    .ds-layout-label {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: hsl(var(--text-ternary));
+      margin-bottom: 1rem;
+    }
+    .ds-layout-block {
+      background: hsl(var(--primary) / .12);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 11px;
+      color: hsl(var(--primary));
+      font-weight: 600;
+    }
+
+    /* Icon grid */
+    .ds-icon-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+    .ds-icon-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 1rem;
+      border: 1px solid hsl(var(--border));
+      border-radius: 12px;
+      min-width: 80px;
+    }
+    .ds-icon-name {
+      font-size: 10px;
+      color: hsl(var(--text-ternary));
+      text-align: center;
+    }
+
+    /* Animated demo triggers */
+    .ds-animate-trigger { cursor: pointer; }
+    .ds-animate-trigger:hover .ds-motion-demo-box {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+    }
+    .ds-motion-demo-box {
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      background: hsl(var(--primary));
+      transition: all 0.3s ease;
+    }
+
+    /* Pulse demo */
+    @keyframes ds-pulse-demo { 50% { opacity: .4; } }
+    .ds-animate-pulse-demo { animation: ds-pulse-demo 2s cubic-bezier(.4,0,.6,1) infinite; }
+
+    /* Spin demo */
+    @keyframes ds-spin-demo { to { transform: rotate(1turn); } }
+    .ds-animate-spin-demo { animation: ds-spin-demo 1.5s linear infinite; }
+
+    /* SlideUp demo */
+    @keyframes ds-slideUp-demo { 0% { transform: translateY(12px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+    .ds-animate-slideup-demo { animation: ds-slideUp-demo 0.4s ease-out both; }
+
+    /* Scroll reveal demo */
+    .ds-reveal-box {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.6s cubic-bezier(.16,1,.3,1), transform 0.6s cubic-bezier(.16,1,.3,1);
+    }
+    .ds-reveal-box.visible {
+      opacity: 1;
+      transform: none;
+    }
+
+    /* Hero exact-clone overrides for Design System text */
+    .ds-hero-spacer { height: 80px; }
+
+    /* Gradient separator */
+    .ds-gradient-sep {
+      height: 1px;
+      background: linear-gradient(to right, transparent, hsl(var(--border)), transparent);
+      margin: 0;
+    }
+  </style>
+</head>
+<body class="__className_1e567c overflow-x-hidden">
+
+  <!-- ── DS Top Nav ── -->
+  <nav class="ds-topnav">
+    <span class="ds-brand">MD · Design System</span>
+    <a href="#hero">Hero</a>
+    <a href="#typography">Typography</a>
+    <a href="#colors">Colors &amp; Surfaces</a>
+    <a href="#components">Components</a>
+    <a href="#layout">Layout</a>
+    <a href="#motion">Motion</a>
+    <a href="#icons">Icons</a>
+  </nav>
+
+  <!-- ══════════════════════════════════════════════
+       0. HERO — Exact clone, adapted text
+  ══════════════════════════════════════════════ -->
+  <section id="hero">
+    <!-- Original site nav (structural clone) -->
+    <nav class="fixed top-0 left-0 w-screen bg-white border-b border-transparent transition-all duration-300 ease-in-out lg:px-5 xl:px-0 z-[100]" style="top: 52px;">
+      <div class="container relative">
+        <section class="flex flex-row gap-4 justify-between items-center px-8 py-2 w-full h-20 transition-all duration-500 ease-in-out sm:px-[88px] lg:px-8">
+          <div class="flex justify-center items-center w-fit">
+            <a href="index.html" tabindex="0">
+              <img alt="Logo da moura" decoding="async" height="58.5" loading="lazy" src="assets/bd37c5d1da8c2833_md-icone-marca-oficial.svg" style="color:transparent" width="84" />
+            </a>
+          </div>
+          <div class="hidden flex-row gap-10 items-center text-center transition-all duration-300 ease-in-out w-fit lg:flex">
+            <a class="text-sm transition-all ease-in-out text-nowrap hover:text-primary hover:font-semibold" href="#typography" tabindex="0">Typography</a>
+            <a class="text-sm transition-all ease-in-out text-nowrap hover:text-primary hover:font-semibold" href="#colors" tabindex="0">Colors</a>
+            <a class="text-sm transition-all ease-in-out text-nowrap hover:text-primary hover:font-semibold" href="#components" tabindex="0">Components</a>
+            <a class="text-sm transition-all ease-in-out text-nowrap hover:text-primary hover:font-semibold" href="#layout" tabindex="0">Layout</a>
+            <a class="text-sm transition-all ease-in-out text-nowrap hover:text-primary hover:font-semibold" href="#motion" tabindex="0">Motion</a>
+          </div>
+          <div class="flex gap-6 justify-between items-center lg:gap-2 w-fit">
+            <div class="w-full h-[3.2rem] sm:block hidden">
+              <button class="flex w-full items-center rounded-full gap-2 border px-4 py-2 h-[52px] justify-center bg-white sm:border-white border-input font-medium text-xs" type="button">
+                <span style="pointer-events:none">Design System</span>
+                <div class="flex flex-col items-center justify-center h-10 rounded-full w-fit py-2">
+                  <svg aria-hidden="true" class="lucide lucide-chevron-up w-5 h-5 text-primary" fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="m18 15-6-6-6 6"></path></svg>
+                  <svg aria-hidden="true" class="lucide lucide-chevron-down w-5 h-5 text-primary" fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="m6 9 6 6 6-6"></path></svg>
+                </div>
+              </button>
+            </div>
+            <button class="inline-flex items-center transition-all ease-in-out border font-normal justify-center whitespace-nowrap disabled:pointer-events-none disabled:opacity-50 rounded-full border-primary bg-primary text-white px-10 py-6 sm:text-lg overflow-hidden w-[6.8rem] h-[3.2rem] text-base" type="button">
+              <div class="flex w-fit gap-2 justify-center items-center">
+                <p class="flex justify-between items-center w-full text-base" style="opacity:1;transform:none;">Menu
+                  <svg fill="none" height="20" width="20" xmlns="http://www.w3.org/2000/svg"><path d="M6.07 15.834h10.597m0-11.667H10.81M16.666 10H3.333" stroke="#fff" stroke-linecap="round" stroke-width="1.25"></path></svg>
+                </p>
+              </div>
+            </button>
+          </div>
+        </section>
+      </div>
+    </nav>
+
+    <!-- Hero body (exact structure clone) -->
+    <main class="container flex relative flex-col justify-center items-center pt-20" style="padding-top: calc(80px + 80px);">
+      <div class="container flex relative flex-col justify-center items-center pt-20 max-w-[1200px] w-full">
+        <div class="min-h-fit sm:min-h-[80vh]">
+          <section class="flex overflow-visible relative flex-col justify-start items-center -mb-[50rem]">
+            <div class="flex overflow-hidden flex-col justify-center items-center w-screen h-screen text-center">
+              <div class="flex flex-col justify-center items-center w-full"></div>
+            </div>
+            <div class="absolute z-[30] w-full flex items-end justify-center overflow-visible">
+              <div class="relative flex items-center justify-center w-full h-[60vh] overflow-hidden mb-16 md:mb-[38rem] xl:mb-[25rem] 2xl:mb-[38rem] rounded-[30px] container">
+                <div class="min-w-[1300px] w-full max-w-[100%] flex justify-center rounded-[30px] overflow-hidden">
+                  <!-- Replaced the gif with a static gradient hero panel -->
+                  <div style="width:100%;height:340px;border-radius:30px;background:linear-gradient(135deg,#0a0a0a 0%,#1a0508 50%,#AB1A2D 100%);display:flex;align-items:center;justify-content:center;flex-direction:column;gap:2rem;padding:3rem;">
+                    <img alt="Logo da moura" src="assets/bd37c5d1da8c2833_md-icone-marca-oficial.svg" style="height:70px;filter:brightness(0) invert(1);opacity:0.9;" />
+                    <div style="text-align:center;">
+                      <p style="font-size:clamp(1.6rem,4vw,3rem);color:#fff;line-height:1.1;font-weight:400;">Sistema de <strong style="font-style:italic;">Design</strong></p>
+                      <p style="font-size:1rem;color:rgba(255,255,255,0.6);margin-top:0.75rem;">Biblioteca viva de estilos, componentes e padrões</p>
+                    </div>
+                    <div class="flex gap-4 justify-center flex-wrap" style="margin-top:0.5rem;">
+                      <a href="#components" class="inline-flex items-center transition-all ease-in-out border font-normal justify-center whitespace-nowrap rounded-full bg-transparent py-6 px-5 sm:h-[70px] border-white/50 text-white/80 text-sm sm:text-lg h-[64px] sm:px-10" style="text-decoration:none;">
+                        <div class="flex w-fit gap-2 justify-center items-center">Ver componentes</div>
+                      </a>
+                      <a href="#typography" class="inline-flex items-center transition-all ease-in-out border font-normal justify-center whitespace-nowrap rounded-full border-primary bg-primary text-white py-6 px-10 sm:h-[70px] text-sm sm:text-lg h-[64px]" style="text-decoration:none;">
+                        <div class="flex w-fit gap-2 justify-center items-center">Tipografia</div>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
+
+        <!-- Banner clone -->
+        <section class="relative z-[40] flex flex-col items-center justify-start w-full bg-gradient-to-t from-white to-transparent from-95%" style="padding-top: 52rem;">
+          <div class="w-full relative px-8 sm:px-[88px] mb-20 2xl:px-0">
+            <div class="w-full">
+              <div class="block w-full banner-link">
+                <div class="w-full rounded-[32px] border border-[#E3E3E3] bg-white hover:bg-[#FAFAFA] transition-colors duration-200 py-6 px-8 text-center">
+                  <span class="text-base sm:text-lg">Este arquivo documenta o sistema de design completo — tipografia, cores, componentes e padrões de layout.</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </main>
+  </section>
+
+  <!-- ══════════════════════════════════════════════
+       1. TYPOGRAPHY
+  ══════════════════════════════════════════════ -->
+  <section id="typography" class="ds-section" style="padding: 5.5rem 5rem; max-width: 1200px; margin: 0 auto;">
+    <p class="ds-section-title">01 — Typography</p>
+
+    <!-- Heading 1 -->
+    <div class="ds-type-row">
+      <span class="ds-type-label">Heading 1</span>
+      <div class="ds-type-preview">
+        <p class="text-5xl">Imóveis para você</p>
+      </div>
+      <span class="ds-type-spec">48px / 1</span>
+    </div>
+
+    <!-- Heading 2 -->
+    <div class="ds-type-row">
+      <span class="ds-type-label">Heading 2</span>
+      <div class="ds-type-preview">
+        <p class="text-4xl">Conheça nossos empreendimentos</p>
+      </div>
+      <span class="ds-type-spec">36px / 36px</span>
+    </div>
+
+    <!-- Heading 3 -->
+    <div class="ds-type-row">
+      <span class="ds-type-label">Heading 3 / headlineLarge</span>
+      <div class="ds-type-preview">
+        <p class="text-headlineLarge">Novidades do mercado</p>
+      </div>
+      <span class="ds-type-spec">32px / 40px</span>
+    </div>
+
+    <!-- Heading 4 -->
+    <div class="ds-type-row">
+      <span class="ds-type-label">Heading 4 / headlineMedium</span>
+      <div class="ds-type-preview">
+        <p class="text-headlineMedium">Você no Centro de tudo</p>
+      </div>
+      <span class="ds-type-spec">28px / 26px</span>
+    </div>
+
+    <!-- Italic heading (brand pattern) -->
+    <div class="ds-type-row">
+      <span class="ds-type-label">Display / Italic Brand</span>
+      <div class="ds-type-preview">
+        <p class="text-3xl leading-10">Imóveis <br/><strong class="italic">para você</strong></p>
+      </div>
+      <span class="ds-type-spec">30px / 40px<br/>normal + bold italic</span>
+    </div>
+
+    <!-- Label Large -->
+    <div class="ds-type-row">
+      <span class="ds-type-label">Label Large</span>
+      <div class="ds-type-preview">
+        <p class="text-labelLarge">Conheça nosso time de vendas</p>
+      </div>
+      <span class="ds-type-spec">20px / 28px</span>
+    </div>
+
+    <!-- Bold L -->
+    <div class="ds-type-row">
+      <span class="ds-type-label">Bold L / text-xl</span>
+      <div class="ds-type-preview">
+        <p class="text-xl font-bold">4020-3538</p>
+      </div>
+      <span class="ds-type-spec">20px / 24px · 700</span>
+    </div>
+
+    <!-- Bold M (italic) -->
+    <div class="ds-type-row">
+      <span class="ds-type-label">Bold M / Italic</span>
+      <div class="ds-type-preview">
+        <p class="text-xl font-bold italic">vendas especializada</p>
+      </div>
+      <span class="ds-type-spec">20px / 24px · 700i</span>
+    </div>
+
+    <!-- Paragraph / text-lg -->
+    <div class="ds-type-row">
+      <span class="ds-type-label">Paragraph Large / text-lg</span>
+      <div class="ds-type-preview">
+        <p class="text-lg">Explore todo o conteúdo no nosso blog e fique por dentro das novidades do setor imobiliário.</p>
+      </div>
+      <span class="ds-type-spec">18px / 24px</span>
+    </div>
+
+    <!-- Regular M / labelMedium -->
+    <div class="ds-type-row">
+      <span class="ds-type-label">Regular M / labelMedium</span>
+      <div class="ds-type-preview">
+        <p class="text-labelMedium">Temos uma equipe de vendas especializada para lhe atender.</p>
+      </div>
+      <span class="ds-type-spec">16px / 24px</span>
+    </div>
+
+    <!-- Regular S / text-sm -->
+    <div class="ds-type-row">
+      <span class="ds-type-label">Regular S / text-sm</span>
+      <div class="ds-type-preview">
+        <p class="text-sm opacity-90">SÃO JOSÉ, Pernambuco · 348 – 697 m² · 4–5 Suítes</p>
+      </div>
+      <span class="ds-type-spec">14px / 16px</span>
+    </div>
+
+    <!-- XS / Footnote -->
+    <div class="ds-type-row">
+      <span class="ds-type-label">Footnote / text-xs</span>
+      <div class="ds-type-preview">
+        <p class="text-xs text-webFootnote" style="font-size:10px;line-height:18px;">© 2026 Moura Dubeux. Todos os direitos reservados.</p>
+      </div>
+      <span class="ds-type-spec">10px / 18px</span>
+    </div>
+  </section>
+
+  <div class="ds-gradient-sep"></div>
+
+  <!-- ══════════════════════════════════════════════
+       2. COLORS & SURFACES
+  ══════════════════════════════════════════════ -->
+  <section id="colors" class="ds-section" style="padding: 5.5rem 5rem; max-width: 1200px; margin: 0 auto;">
+    <p class="ds-section-title">02 — Colors &amp; Surfaces</p>
+
+    <p class="text-sm font-semibold mb-4" style="color: hsl(var(--text-secondary));">Brand Colors</p>
+    <div class="ds-swatches" style="margin-bottom: 3rem;">
+      <div class="ds-swatch">
+        <div class="ds-swatch-box" style="background: hsl(352, 74%, 39%);"></div>
+        <span class="ds-swatch-name">Primary</span>
+        <span class="ds-swatch-value">hsl(352,74%,39%)<br/>#AB1A2D</span>
+      </div>
+      <div class="ds-swatch">
+        <div class="ds-swatch-box" style="background: hsl(0, 80%, 22%);"></div>
+        <span class="ds-swatch-name">Primary Dark</span>
+        <span class="ds-swatch-value">hsl(0,80%,22%)<br/>#630D0D</span>
+      </div>
+      <div class="ds-swatch">
+        <div class="ds-swatch-box" style="background: hsl(218, 23%, 7%);"></div>
+        <span class="ds-swatch-name">Text Primary</span>
+        <span class="ds-swatch-value">hsl(218,23%,7%)<br/>#0D1014</span>
+      </div>
+      <div class="ds-swatch">
+        <div class="ds-swatch-box" style="background: hsl(230, 3%, 38%);"></div>
+        <span class="ds-swatch-name">Text Secondary</span>
+        <span class="ds-swatch-value">hsl(230,3%,38%)<br/>#5E6070</span>
+      </div>
+      <div class="ds-swatch">
+        <div class="ds-swatch-box" style="background: hsl(0, 0%, 44%);"></div>
+        <span class="ds-swatch-name">Text Ternary</span>
+        <span class="ds-swatch-value">hsl(0,0%,44%)<br/>#707070</span>
+      </div>
+    </div>
+
+    <p class="text-sm font-semibold mb-4" style="color: hsl(var(--text-secondary));">Backgrounds &amp; Surfaces</p>
+    <div class="ds-swatches" style="margin-bottom: 3rem;">
+      <div class="ds-swatch">
+        <div class="ds-swatch-box" style="background: #ffffff; border: 1px solid #E5E5E5;"></div>
+        <span class="ds-swatch-name">Background</span>
+        <span class="ds-swatch-value">#FFFFFF<br/>hsl(0,0%,100%)</span>
+      </div>
+      <div class="ds-swatch">
+        <div class="ds-swatch-box" style="background: hsl(0 0% 96.1%);"></div>
+        <span class="ds-swatch-name">Muted</span>
+        <span class="ds-swatch-value">#F5F5F5<br/>hsl(0,0%,96.1%)</span>
+      </div>
+      <div class="ds-swatch">
+        <div class="ds-swatch-box" style="background: #FAFAFA;"></div>
+        <span class="ds-swatch-name">Surface Hover</span>
+        <span class="ds-swatch-value">#FAFAFA</span>
+      </div>
+      <div class="ds-swatch">
+        <div class="ds-swatch-box" style="background: #F6F6F6;"></div>
+        <span class="ds-swatch-name">Surface Light</span>
+        <span class="ds-swatch-value">#F6F6F6</span>
+      </div>
+      <div class="ds-swatch">
+        <div class="ds-swatch-box" style="background: #2A2A2A;"></div>
+        <span class="ds-swatch-name">Dark Surface</span>
+        <span class="ds-swatch-value">#2A2A2A</span>
+      </div>
+      <div class="ds-swatch">
+        <div class="ds-swatch-box" style="background: #000000;"></div>
+        <span class="ds-swatch-name">Footer BG</span>
+        <span class="ds-swatch-value">#000000<br/>bg-black</span>
+      </div>
+    </div>
+
+    <p class="text-sm font-semibold mb-4" style="color: hsl(var(--text-secondary));">Borders &amp; Dividers</p>
+    <div class="ds-swatches" style="margin-bottom: 3rem;">
+      <div class="ds-swatch">
+        <div class="ds-swatch-box" style="background: hsl(0,0%,89.8%);"></div>
+        <span class="ds-swatch-name">Border Input</span>
+        <span class="ds-swatch-value">hsl(0,0%,89.8%)<br/>#E5E5E5</span>
+      </div>
+      <div class="ds-swatch">
+        <div class="ds-swatch-box" style="background: hsl(0,0%,50%);"></div>
+        <span class="ds-swatch-name">Border Primary</span>
+        <span class="ds-swatch-value">hsl(0,0%,50%)<br/>#808080</span>
+      </div>
+      <div class="ds-swatch">
+        <div class="ds-swatch-box" style="background: rgba(41,42,46,0.12);"></div>
+        <span class="ds-swatch-name">Border Subtle</span>
+        <span class="ds-swatch-value">#292A2E 12%<br/>opacity</span>
+      </div>
+      <div class="ds-swatch">
+        <div class="ds-swatch-box" style="background: rgba(255,255,255,0.5);border:1px solid rgba(255,255,255,0.5);"></div>
+        <span class="ds-swatch-name">Border White/50</span>
+        <span class="ds-swatch-value">white 50%<br/>on dark BG</span>
+      </div>
+    </div>
+
+    <p class="text-sm font-semibold mb-4" style="color: hsl(var(--text-secondary));">Overlays &amp; Gradients</p>
+    <div class="ds-swatches" style="margin-bottom: 1rem;">
+      <div class="ds-swatch" style="width: 200px;">
+        <div class="ds-swatch-box" style="width:200px;background: rgba(0,0,0,0.8);"></div>
+        <span class="ds-swatch-name">Video Overlay</span>
+        <span class="ds-swatch-value">bg-black/80<br/>rgba(0,0,0,0.8)</span>
+      </div>
+      <div class="ds-swatch" style="width: 200px;">
+        <div class="ds-swatch-box" style="width:200px;background: rgba(0,0,0,0.4);"></div>
+        <span class="ds-swatch-name">Card Overlay</span>
+        <span class="ds-swatch-value">bg-black/40<br/>rgba(0,0,0,0.4)</span>
+      </div>
+      <div class="ds-swatch" style="width: 200px;">
+        <div class="ds-swatch-box" style="width:200px;background: linear-gradient(to top, white 95%, transparent);"></div>
+        <span class="ds-swatch-name">Section Fade</span>
+        <span class="ds-swatch-value">from-white to-transparent<br/>from-95%</span>
+      </div>
+      <div class="ds-swatch" style="width: 200px;">
+        <div class="ds-swatch-box" style="width:200px;background: linear-gradient(to right, hsl(352,74%,39%), transparent);"></div>
+        <span class="ds-swatch-name">CTA Gradient</span>
+        <span class="ds-swatch-value">from-primary<br/>to-transparent</span>
+      </div>
+    </div>
+
+    <p class="text-sm font-semibold mb-4 mt-8" style="color: hsl(var(--text-secondary));">System Colors</p>
+    <div class="ds-swatches">
+      <div class="ds-swatch">
+        <div class="ds-swatch-box" style="background: hsl(144,91%,30%);"></div>
+        <span class="ds-swatch-name">Success</span>
+        <span class="ds-swatch-value">hsl(144,91%,30%)</span>
+      </div>
+      <div class="ds-swatch">
+        <div class="ds-swatch-box" style="background: hsl(0,79%,28%);"></div>
+        <span class="ds-swatch-name">Error</span>
+        <span class="ds-swatch-value">hsl(0,79%,28%)</span>
+      </div>
+      <div class="ds-swatch">
+        <div class="ds-swatch-box" style="background: hsl(40,79%,28%);"></div>
+        <span class="ds-swatch-name">Warning</span>
+        <span class="ds-swatch-value">hsl(40,79%,28%)</span>
+      </div>
+      <div class="ds-swatch">
+        <div class="ds-swatch-box" style="background: hsl(223,79%,28%);"></div>
+        <span class="ds-swatch-name">Information</span>
+        <span class="ds-swatch-value">hsl(223,79%,28%)</span>
+      </div>
+    </div>
+  </section>
+
+  <div class="ds-gradient-sep"></div>
+
+  <!-- ══════════════════════════════════════════════
+       3. COMPONENTS
+  ══════════════════════════════════════════════ -->
+  <section id="components" class="ds-section" style="padding: 5.5rem 5rem; max-width: 1200px; margin: 0 auto;">
+    <p class="ds-section-title">03 — UI Components</p>
+
+    <!-- BUTTONS -->
+    <p class="text-sm font-semibold mb-6" style="color: hsl(var(--text-secondary));">Buttons</p>
+
+    <div class="ds-component-row">
+      <span class="ds-component-label">Primary</span>
+      <button class="inline-flex items-center transition-all ease-in-out border font-normal justify-center whitespace-nowrap disabled:pointer-events-none disabled:opacity-50 rounded-full border-primary bg-primary text-white px-10 py-6 sm:text-lg overflow-hidden h-[3.2rem] text-base">
+        <div class="flex w-fit gap-2 justify-center items-center">Ver imóvel</div>
+      </button>
+      <button class="inline-flex items-center transition-all ease-in-out border font-normal justify-center whitespace-nowrap disabled:pointer-events-none disabled:opacity-50 rounded-full border-primary bg-primary text-white px-10 py-6 sm:text-lg overflow-hidden h-[3.2rem] text-base" style="opacity:.6;cursor:default;" disabled>
+        <div class="flex w-fit gap-2 justify-center items-center">Disabled</div>
+      </button>
+    </div>
+
+    <div class="ds-component-row">
+      <span class="ds-component-label">Secondary (Outline)</span>
+      <button class="inline-flex items-center transition-all ease-in-out border font-normal justify-center whitespace-nowrap disabled:pointer-events-none disabled:opacity-50 rounded-full border-input bg-white text-black px-10 py-6 sm:text-lg text-md h-[70px] sm:w-fit w-full">
+        <div class="flex w-fit gap-2 justify-center items-center">Ver todos os imóveis</div>
+      </button>
+      <button class="inline-flex items-center transition-all ease-in-out border font-normal justify-center whitespace-nowrap disabled:pointer-events-none disabled:opacity-50 rounded-full border-input bg-white text-black px-10 py-6 sm:text-lg text-md h-[70px] sm:w-fit w-full" style="background:#f5f5f5;">
+        <div class="flex w-fit gap-2 justify-center items-center">Hover State</div>
+      </button>
+    </div>
+
+    <div class="ds-component-row" style="background:#1a1a1a;border-radius:16px;padding:1.5rem 2rem;">
+      <span class="ds-component-label" style="color:rgba(255,255,255,0.5);">Ghost (on dark)</span>
+      <button class="inline-flex w-fit items-center transition-all ease-in-out border font-normal justify-center whitespace-nowrap disabled:pointer-events-none disabled:opacity-50 rounded-full bg-transparent py-6 px-5 sm:h-[70px] border-white/50 text-white/80 text-sm sm:text-lg h-[64px] sm:px-10">
+        <div class="flex w-fit gap-2 justify-center items-center">Ver imóvel</div>
+      </button>
+      <button class="inline-flex w-fit items-center transition-all ease-in-out border font-normal justify-center whitespace-nowrap disabled:pointer-events-none disabled:opacity-50 rounded-full bg-transparent py-6 px-5 sm:h-[70px] border-white/50 text-white/80 text-sm sm:text-lg h-[64px] sm:px-10" style="opacity:.4;">
+        <div class="flex w-fit gap-2 justify-center items-center">Disabled</div>
+      </button>
+    </div>
+
+    <!-- SEARCH INPUT -->
+    <p class="text-sm font-semibold mb-4 mt-12" style="color: hsl(var(--text-secondary));">Input / Search</p>
+    <div class="ds-component-row">
+      <span class="ds-component-label">Search Default</span>
+      <div class="transition-all flex items-end justify-end ease-in-out duration-500 w-[220px]">
+        <div class="flex-row default-input focus:outline-none rounded-full w-fit gap-0 px-[24px] h-[70px] py-[22px] justify-center items-center flex text-sm font-medium border border-input">
+          <svg fill="none" height="20" width="20" xmlns="http://www.w3.org/2000/svg"><path d="m2.763 11.484.609-.143zm0-4.547.609.142zm12.895 0 .608-.143zm0 4.547.608.143zm-4.174 4.174-.143-.609zm-4.547 0-.143.608zm0-12.895-.143-.608zm4.547 0 .143-.608zm5.574 15.179a.625.625 0 1 0 .884-.884zm-13.686-6.6a9.3 9.3 0 0 1 0-4.263l-1.217-.285a10.6 10.6 0 0 0 0 4.833zm11.677-4.263a9.3 9.3 0 0 1 0 4.263l1.217.285c.373-1.59.373-3.244 0-4.833zm-3.707 7.97a9.3 9.3 0 0 1-4.263 0l-.285 1.217c1.59.373 3.244.373 4.833 0zM7.079 3.372a9.3 9.3 0 0 1 4.263 0l.285-1.217a10.6 10.6 0 0 0-4.833 0zm0 11.677a4.98 4.98 0 0 1-3.707-3.707l-1.217.285a6.23 6.23 0 0 0 4.639 4.64zm4.548 1.217a6.23 6.23 0 0 0 4.64-4.64l-1.218-.284a4.98 4.98 0 0 1-3.707 3.707zM11.34 3.372a4.98 4.98 0 0 1 3.708 3.707l1.217-.285a6.23 6.23 0 0 0-4.64-4.64zM6.795 2.155a6.23 6.23 0 0 0-4.64 4.639l1.218.285a4.98 4.98 0 0 1 3.707-3.707zm7.21 12.733 3.054 3.054.884-.884-3.054-3.054z" fill="#AB1A2D"></path></svg>
+          <input autocomplete="off" class="h-10 transition-all ease-in-out duration-500 outline-none bg-transparent ml-2" placeholder="Pesquisar" type="text" style="width:120px;" />
+        </div>
+      </div>
+    </div>
+
+    <!-- PROPERTY CARD -->
+    <p class="text-sm font-semibold mb-4 mt-12" style="color: hsl(var(--text-secondary));">Property Card</p>
+    <div class="ds-component-row" style="align-items: flex-start;">
+      <span class="ds-component-label" style="padding-top: 1rem;">Default</span>
+      <a href="#" style="text-decoration:none;">
+        <div class="flex overflow-visible flex-col w-full gap-8" style="width:271px;">
+          <div class="relative overflow-hidden rounded-[32px] bg-muted" style="width:271px;height:301px;">
+            <img alt="Propriedade" src="assets/8677e4fd06ddbb48_image.jpg" style="position:absolute;height:100%;width:100%;inset:0;object-fit:cover;object-position:center;" />
+          </div>
+          <div class="flex gap-2 justify-start items-start w-full">
+            <div class="w-6 pt-2.5 border-b border-input"></div>
+            <div class="flex flex-col justify-start items-start">
+              <p>MOURA DUBEUX PLAZA</p>
+              <p class="text-sm leading-[20px] opacity-90 mb-2">SÃO JOSÉ, Pernambuco</p>
+              <p class="text-sm leading-[20px] opacity-90">348 – 697 m² · 4–5 Suítes</p>
+            </div>
+          </div>
+        </div>
+      </a>
+
+      <!-- Card offset variant -->
+      <a href="#" style="text-decoration:none;margin-top:2.5rem;">
+        <div class="flex overflow-visible flex-col w-full gap-8" style="width:301px;">
+          <div class="relative overflow-hidden rounded-[32px] bg-muted" style="width:301px;height:271px;">
+            <img alt="Propriedade" src="assets/5f86704915cd7935_image.jpg" style="position:absolute;height:100%;width:100%;inset:0;object-fit:cover;object-position:center;" />
+          </div>
+          <div class="flex gap-2 justify-start items-start w-full">
+            <div class="w-6 pt-2.5 border-b border-input"></div>
+            <div class="flex flex-col justify-start items-start">
+              <p>INFINITY RECIFE</p>
+              <p class="text-sm leading-[20px] opacity-90 mb-2">Boa Viagem, Pernambuco</p>
+              <p class="text-sm leading-[20px] opacity-90">26 – 97 m²</p>
+            </div>
+          </div>
+        </div>
+      </a>
+    </div>
+
+    <!-- VIDEO CARD -->
+    <p class="text-sm font-semibold mb-4 mt-12" style="color: hsl(var(--text-secondary));">Video / Feature Card</p>
+    <div class="ds-component-row" style="align-items: flex-start;">
+      <span class="ds-component-label" style="padding-top:1rem;">Dark Overlay</span>
+      <div class="flex overflow-hidden relative" style="width:100%;max-width:600px;height:320px;border-radius:24px;background:#111;">
+        <img src="assets/419832d6c3e1b975_image.webp" alt="Feature" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0.5;" />
+        <div class="flex overflow-hidden z-10 flex-col w-full h-full bg-black/80 sm:flex-row">
+          <div class="w-full sm:py-8 sm:pl-8">
+            <div class="flex flex-col items-end justify-between w-full gap-4 p-8 pb-0 sm:gap-8 sm:h-full h-fit md:p-16 sm:!pr-0">
+              <div class="overflow-hidden w-full">
+                <div class="flex flex-col justify-between w-full">
+                  <div class="flex gap-8 justify-between items-center w-full">
+                    <div class="flex justify-center items-center w-full">
+                      <img alt="Logo" src="assets/064b1604cb688983_image.png" style="height:120px;width:auto;object-fit:contain;" />
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="flex flex-col gap-4 justify-between items-center w-full sm:gap-8 sm:flex-row">
+                <div class="w-full">
+                  <p class="w-full text-sm text-white sm:text-lg line-clamp-3 sm:text-left">Apartamentos de 118 a 335 m², 3 a 4 suítes, além de opções com duplex e cobertura duplex.</p>
+                </div>
+                <button class="inline-flex w-fit items-center transition-all ease-in-out border font-normal justify-center whitespace-nowrap rounded-full bg-transparent py-6 px-5 sm:h-[70px] border-white/50 text-white/80 text-sm sm:text-lg h-[64px] sm:px-10">
+                  <div class="flex w-fit gap-2 justify-center items-center">Ver imóvel</div>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- BLOG CARD -->
+    <p class="text-sm font-semibold mb-4 mt-12" style="color: hsl(var(--text-secondary));">Blog / News Card</p>
+    <div class="ds-component-row" style="align-items: flex-start;">
+      <span class="ds-component-label" style="padding-top:1rem;">Hover: scale image</span>
+      <a href="#" style="text-decoration:none;">
+        <div class="relative group flex flex-col items-center justify-between gap-2 w-full overflow-hidden cursor-pointer" style="width:344px;height:344px;">
+          <div class="absolute flex flex-col items-center bg-muted justify-between gap-1 rounded-[32px] h-full w-full overflow-hidden">
+            <img alt="Blog post" class="group-hover:scale-[1.05] transition-all ease-in-out" src="assets/b53e3117a1de1115_image.jpg" style="position:absolute;height:100%;width:100%;inset:0;object-fit:cover;" />
+          </div>
+          <div class="z-20 flex flex-col items-start justify-end w-full gap-2 text-white bg-black/40 rounded-[32px] p-7 h-full">
+            <p class="p-2 text-lg bg-red-700 rounded-lg">Institucional</p>
+            <p>Moura Dubeux conquista Selo Empresa Amiga da Mulher em Sergipe</p>
+          </div>
+        </div>
+      </a>
+      <a href="#" style="text-decoration:none; margin-top: 5rem;">
+        <div class="relative group flex flex-col items-center justify-between gap-2 w-full overflow-hidden cursor-pointer" style="width:344px;height:344px;">
+          <div class="absolute flex flex-col items-center bg-muted justify-between gap-1 rounded-[32px] h-full w-full overflow-hidden">
+            <img alt="Blog post" class="group-hover:scale-[1.05] transition-all ease-in-out" src="assets/7bae8544f04f55d0_image.png" style="position:absolute;height:100%;width:100%;inset:0;object-fit:cover;" />
+          </div>
+          <div class="z-20 flex flex-col items-start justify-end w-full gap-2 text-white bg-black/40 rounded-[32px] p-7 h-full">
+            <p class="p-2 text-lg bg-red-700 rounded-lg">Institucional</p>
+            <p>Moura Dubeux no TEDx Fortaleza: estratégia de marca aposta em conexão</p>
+          </div>
+        </div>
+      </a>
+    </div>
+
+    <!-- NAVIGATION ARROWS -->
+    <p class="text-sm font-semibold mb-4 mt-12" style="color: hsl(var(--text-secondary));">Navigation Arrows</p>
+    <div class="ds-component-row">
+      <span class="ds-component-label">Carousel Controls</span>
+      <button class="flex items-center justify-center cursor-pointer border border-[#292A2E1F] border-opacity-10 rounded-full w-12 h-12 rotate-180 hover:bg-muted transition-all ease-in-out">
+        <svg fill="none" height="16" width="16" xmlns="http://www.w3.org/2000/svg"><path d="M13.333 8H2.666M10 11.335S13.333 8.88 13.333 8c0-.878-3.333-3.333-3.333-3.333" stroke="#000" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+      </button>
+      <button class="flex items-center justify-center cursor-pointer border border-[#292A2E1F] border-opacity-10 rounded-full w-12 h-12 hover:bg-muted transition-all ease-in-out">
+        <svg fill="none" height="16" width="16" xmlns="http://www.w3.org/2000/svg"><path d="M13.333 8H2.666M10 11.335S13.333 8.88 13.333 8c0-.878-3.333-3.333-3.333-3.333" stroke="#000" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+      </button>
+    </div>
+
+    <!-- BANNER -->
+    <p class="text-sm font-semibold mb-4 mt-12" style="color: hsl(var(--text-secondary));">Banner Strip</p>
+    <div class="ds-component-row" style="display:block;">
+      <div class="block w-full banner-link" style="cursor:pointer;">
+        <div class="w-full rounded-[32px] border border-[#E3E3E3] bg-white hover:bg-[#FAFAFA] transition-colors duration-200 py-6 px-8 text-center">
+          <span class="text-base sm:text-lg">Clique aqui e conheça nossos empreendimentos entregues.</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- CTA SECTION (consultant contact) -->
+    <p class="text-sm font-semibold mb-4 mt-12" style="color: hsl(var(--text-secondary));">CTA Section</p>
+    <div class="ds-component-row" style="display:block;">
+      <div class="flex relative justify-between items-center text-white rounded-2xl bg-primary sm:justify-end overflow-hidden" style="min-height:14rem;border-radius:24px;background:hsl(352,74%,39%);">
+        <img alt="CTA background" src="assets/ae9d2539e8817d90_image.webp" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 20%;opacity:0.4;" />
+        <div class="z-50 flex flex-col items-start justify-between w-full h-full gap-8 p-8 sm:gap-6 sm:p-16" style="background:linear-gradient(to right, hsl(352,74%,39%) 0%, transparent 70%);">
+          <div class="flex flex-col gap-4 items-start w-full">
+            <p class="text-[32px] leading-[35px]">Você no <br/><strong class="italic">Centro de tudo</strong></p>
+          </div>
+          <div class="flex flex-col gap-4 items-start">
+            <p class="text-xl italic font-bold">4020-3538</p>
+            <p class="text-base">Temos uma equipe de <strong class="italic">vendas especializada</strong> para lhe atender</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- FOOTER COMPONENT -->
+    <p class="text-sm font-semibold mb-4 mt-12" style="color: hsl(var(--text-secondary));">Footer</p>
+    <div class="ds-component-row" style="display:block;">
+      <div class="flex items-center p-8 sm:p-12 justify-center w-full transition-all duration-700 ease-in-out bg-black" style="border-radius:32px;">
+        <div class="w-full">
+          <div class="flex flex-col gap-10 justify-between items-center w-full md:flex-row h-fit">
+            <img alt="Moura Dubeux" src="assets/9c69028bc4d08f61_image.png" style="height:80px;width:auto;object-fit:contain;" />
+            <div class="flex flex-row gap-2 p-4 px-0 py-6 rounded-2xl sm:gap-4">
+              <!-- Instagram -->
+              <div class="flex justify-center items-center px-4 py-2 w-16 h-16 text-white rounded-full border border-white" style="border-opacity:0.25;">
+                <svg fill="none" height="21" width="21" xmlns="http://www.w3.org/2000/svg"><path d="M1.25 9.5c0-3.771 0-5.657 1.172-6.828S5.479 1.5 9.25 1.5h2c3.771 0 5.657 0 6.828 1.172S19.25 5.729 19.25 9.5v2c0 3.771 0 5.657-1.172 6.828S15.021 19.5 11.25 19.5h-2c-3.771 0-5.657 0-6.828-1.172S1.25 15.271 1.25 11.5z" stroke="currentColor" stroke-width="2"></path><path d="M14.75 7.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3" fill="currentColor"></path><path d="M10.25 13.5a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z" stroke="currentColor" stroke-width="2"></path></svg>
+              </div>
+              <!-- LinkedIn -->
+              <div class="flex justify-center items-center px-4 py-2 w-16 h-16 text-white rounded-full border border-white" style="border-opacity:0.25;">
+                <svg fill="none" height="19" width="19" xmlns="http://www.w3.org/2000/svg"><path d="M16.75.5a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-14a2 2 0 0 1-2-2v-14a2 2 0 0 1 2-2zm-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.32 1.3V7.63H7.88V16h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4V16zM4.63 6.06a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68M6.02 16V7.63H3.25V16z" fill="currentColor"></path></svg>
+              </div>
+              <!-- YouTube -->
+              <div class="flex justify-center items-center px-4 py-2 w-16 h-16 text-white rounded-full border border-white" style="border-opacity:0.25;">
+                <svg fill="none" height="15" width="21" xmlns="http://www.w3.org/2000/svg"><path d="m8.25 10.5 5.19-3-5.19-3zm11.56-7.83c.13.47.22 1.1.28 1.9.07.8.1 1.49.1 2.09l.06.84c0 2.19-.16 3.8-.44 4.83-.25.9-.83 1.48-1.73 1.73-.47.13-1.33.22-2.65.28-1.3.07-2.49.1-3.59.1l-1.59.06c-4.19 0-6.8-.16-7.83-.44-.9-.25-1.48-.83-1.73-1.73-.13-.47-.22-1.1-.28-1.9-.07-.8-.1-1.49-.1-2.09L.25 7.5c0-2.19.16-3.8.44-4.83.25-.9.83-1.48 1.73-1.73C2.89.81 3.75.72 5.07.66c1.3-.07 2.49-.1 3.59-.1L10.25.5c4.19 0 6.8.16 7.83.44.9.25 1.48.83 1.73 1.73" fill="currentColor"></path></svg>
+              </div>
+              <!-- Facebook -->
+              <div class="flex justify-center items-center px-4 py-2 w-16 h-16 text-white rounded-full border border-white" style="border-opacity:0.25;">
+                <svg fill="none" height="21" width="11" xmlns="http://www.w3.org/2000/svg"><path d="M7.5 12H10l1-4H7.5V6c0-1.03 0-2 2-2H11V.64C10.674.597 9.443.5 8.143.5 5.428.5 3.5 2.157 3.5 5.2V8h-3v4h3v8.5h4z" fill="currentColor"></path></svg>
+              </div>
+            </div>
+          </div>
+          <div class="flex flex-col gap-8 justify-between mt-12 w-full md:flex-row">
+            <div class="flex flex-col gap-8 text-sm text-white md:flex-row md:gap-20">
+              <div class="flex flex-col gap-4">
+                <a class="text-white hover:opacity-70 transition-all" href="#">Quem somos</a>
+                <a class="text-white hover:opacity-70 transition-all" href="#">Nossos imóveis</a>
+                <a class="text-white hover:opacity-70 transition-all" href="#">Carreiras</a>
+                <a class="text-white hover:opacity-70 transition-all" href="#">Blog</a>
+              </div>
+              <div class="flex flex-col gap-4">
+                <a class="text-white hover:opacity-70 transition-all" href="#">Portal de Privacidade</a>
+                <a class="text-white hover:opacity-70 transition-all" href="#">Beach Class</a>
+                <a class="text-white hover:opacity-70 transition-all" href="#">Políticas Sustentáveis</a>
+                <a class="text-white hover:opacity-70 transition-all" href="#">Programa de Integridade</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="ds-gradient-sep"></div>
+
+  <!-- ══════════════════════════════════════════════
+       4. LAYOUT & SPACING
+  ══════════════════════════════════════════════ -->
+  <section id="layout" class="ds-section" style="padding: 5.5rem 5rem; max-width: 1200px; margin: 0 auto;">
+    <p class="ds-section-title">04 — Layout &amp; Spacing</p>
+
+    <!-- Container -->
+    <div class="ds-layout-demo">
+      <div class="ds-layout-label">Container · max-w-[1200px], centered, px-8 sm:px-[88px]</div>
+      <div style="display:flex;gap:0.5rem;height:48px;">
+        <div class="ds-layout-block" style="width:88px;height:100%;flex-shrink:0;">88px</div>
+        <div class="ds-layout-block" style="flex:1;height:100%;">max-width: 1200px content area</div>
+        <div class="ds-layout-block" style="width:88px;height:100%;flex-shrink:0;">88px</div>
+      </div>
+    </div>
+
+    <!-- Hero Layout -->
+    <div class="ds-layout-demo">
+      <div class="ds-layout-label">Hero Layout · full-screen + absolute overlay card, -mb-[50rem], z-[30]</div>
+      <div style="position:relative;height:180px;overflow:hidden;border-radius:12px;background:#f0f0f0;">
+        <div class="ds-layout-block" style="width:100%;height:100%;position:absolute;inset:0;border-radius:12px;background:#e8e8e8;display:flex;align-items:center;justify-content:center;">Full-screen bg (h-screen)</div>
+        <div class="ds-layout-block" style="position:absolute;bottom:16px;left:50%;transform:translateX(-50%);width:80%;height:64px;border-radius:16px;z-index:10;background:rgba(171,26,45,0.12);">Overlay card · rounded-[30px] · z-[30] · absolute</div>
+      </div>
+    </div>
+
+    <!-- Staggered Card Grid -->
+    <div class="ds-layout-demo">
+      <div class="ds-layout-label">Staggered Property Grid · flex gap-8, alternating h-[301px] / h-[271px] with mt-10</div>
+      <div style="display:flex;gap:1rem;align-items:flex-start;height:160px;">
+        <div class="ds-layout-block" style="flex:1;height:100%;border-radius:12px;">271px card</div>
+        <div class="ds-layout-block" style="flex:1;height:80%;border-radius:12px;margin-top:20px;">301px + mt-10</div>
+        <div class="ds-layout-block" style="flex:1;height:100%;border-radius:12px;">271px card</div>
+        <div class="ds-layout-block" style="flex:1;height:80%;border-radius:12px;margin-top:20px;">301px + mt-10</div>
+      </div>
+    </div>
+
+    <!-- Footer rounded container -->
+    <div class="ds-layout-demo">
+      <div class="ds-layout-label">Footer Container · max-w-[1400px], p-[88px], border-radius: 32px, bg-black</div>
+      <div class="ds-layout-block" style="height:80px;border-radius:32px;background:#1a1a1a;color:rgba(255,255,255,0.5);padding:0 3rem;">
+        border-radius: 32px · padding: 88px · bg-black
+      </div>
+    </div>
+
+    <!-- Spacing scale -->
+    <p class="text-sm font-semibold mb-4 mt-8" style="color: hsl(var(--text-secondary));">Spacing Scale (gap-N / p-N used in page)</p>
+    <div style="display:flex;flex-direction:column;gap:0.5rem;">
+      <div style="display:flex;align-items:center;gap:1rem;">
+        <span style="font-size:11px;font-family:monospace;min-width:60px;color:hsl(var(--text-ternary));">gap-2</span>
+        <div style="height:8px;width:8px;background:hsl(var(--primary));border-radius:2px;"></div>
+        <span style="font-size:11px;color:hsl(var(--text-ternary));">8px</span>
+      </div>
+      <div style="display:flex;align-items:center;gap:1rem;">
+        <span style="font-size:11px;font-family:monospace;min-width:60px;color:hsl(var(--text-ternary));">gap-4</span>
+        <div style="height:8px;width:16px;background:hsl(var(--primary));border-radius:2px;"></div>
+        <span style="font-size:11px;color:hsl(var(--text-ternary));">16px</span>
+      </div>
+      <div style="display:flex;align-items:center;gap:1rem;">
+        <span style="font-size:11px;font-family:monospace;min-width:60px;color:hsl(var(--text-ternary));">gap-6</span>
+        <div style="height:8px;width:24px;background:hsl(var(--primary));border-radius:2px;"></div>
+        <span style="font-size:11px;color:hsl(var(--text-ternary));">24px</span>
+      </div>
+      <div style="display:flex;align-items:center;gap:1rem;">
+        <span style="font-size:11px;font-family:monospace;min-width:60px;color:hsl(var(--text-ternary));">gap-8</span>
+        <div style="height:8px;width:32px;background:hsl(var(--primary));border-radius:2px;"></div>
+        <span style="font-size:11px;color:hsl(var(--text-ternary));">32px · primary card gap</span>
+      </div>
+      <div style="display:flex;align-items:center;gap:1rem;">
+        <span style="font-size:11px;font-family:monospace;min-width:60px;color:hsl(var(--text-ternary));">gap-10</span>
+        <div style="height:8px;width:40px;background:hsl(var(--primary));border-radius:2px;"></div>
+        <span style="font-size:11px;color:hsl(var(--text-ternary));">40px</span>
+      </div>
+      <div style="display:flex;align-items:center;gap:1rem;">
+        <span style="font-size:11px;font-family:monospace;min-width:60px;color:hsl(var(--text-ternary));">gap-16</span>
+        <div style="height:8px;width:64px;background:hsl(var(--primary));border-radius:2px;"></div>
+        <span style="font-size:11px;color:hsl(var(--text-ternary));">64px · section gap</span>
+      </div>
+      <div style="display:flex;align-items:center;gap:1rem;">
+        <span style="font-size:11px;font-family:monospace;min-width:60px;color:hsl(var(--text-ternary));">gap-20</span>
+        <div style="height:8px;width:80px;background:hsl(var(--primary));border-radius:2px;"></div>
+        <span style="font-size:11px;color:hsl(var(--text-ternary));">80px · major section gap</span>
+      </div>
+      <div style="display:flex;align-items:center;gap:1rem;">
+        <span style="font-size:11px;font-family:monospace;min-width:60px;color:hsl(var(--text-ternary));">p-[88px]</span>
+        <div style="height:8px;width:88px;background:hsl(var(--primary));border-radius:2px;"></div>
+        <span style="font-size:11px;color:hsl(var(--text-ternary));">88px · section horizontal padding</span>
+      </div>
+    </div>
+  </section>
+
+  <div class="ds-gradient-sep"></div>
+
+  <!-- ══════════════════════════════════════════════
+       5. MOTION & INTERACTION
+  ══════════════════════════════════════════════ -->
+  <section id="motion" class="ds-section" style="padding: 5.5rem 5rem; max-width: 1200px; margin: 0 auto;">
+    <p class="ds-section-title">05 — Motion &amp; Interaction</p>
+
+    <div class="ds-motion-grid">
+
+      <!-- Transition Nav -->
+      <div class="ds-motion-card ds-animate-trigger">
+        <div class="ds-motion-demo">
+          <div class="ds-motion-demo-box" style="background: hsl(var(--primary));"></div>
+        </div>
+        <span class="ds-motion-name">Nav / Link Hover</span>
+        <span class="ds-motion-spec">transition-all<br/>duration-300<br/>ease-in-out</span>
+      </div>
+
+      <!-- Transition Slow -->
+      <div class="ds-motion-card ds-animate-trigger">
+        <div class="ds-motion-demo">
+          <div class="ds-motion-demo-box" style="background: #1a1a1a;transition-duration: 500ms !important;"></div>
+        </div>
+        <span class="ds-motion-name">Panel / Button Hover</span>
+        <span class="ds-motion-spec">transition-all<br/>duration-500<br/>ease-in-out</span>
+      </div>
+
+      <!-- Footer Transition -->
+      <div class="ds-motion-card ds-animate-trigger">
+        <div class="ds-motion-demo">
+          <div class="ds-motion-demo-box" style="background: #000;transition-duration: 700ms !important;"></div>
+        </div>
+        <span class="ds-motion-name">Footer Entrance</span>
+        <span class="ds-motion-spec">transition-all<br/>duration-700<br/>ease-in-out</span>
+      </div>
+
+      <!-- Pulse -->
+      <div class="ds-motion-card">
+        <div class="ds-motion-demo">
+          <div class="ds-motion-demo-box ds-animate-pulse-demo"></div>
+        </div>
+        <span class="ds-motion-name">Pulse (loading)</span>
+        <span class="ds-motion-spec">animate-pulse<br/>2s cubic-bezier<br/>(.4,0,.6,1) infinite</span>
+      </div>
+
+      <!-- Spin -->
+      <div class="ds-motion-card">
+        <div class="ds-motion-demo">
+          <div class="ds-animate-spin-demo" style="width:32px;height:32px;border:3px solid hsl(var(--primary)/0.2);border-top-color:hsl(var(--primary));border-radius:50%;"></div>
+        </div>
+        <span class="ds-motion-name">Spin (loading)</span>
+        <span class="ds-motion-spec">animate-spin<br/>1s linear<br/>infinite</span>
+      </div>
+
+      <!-- Slide Up -->
+      <div class="ds-motion-card" id="slideUpCard" style="cursor:pointer;" onclick="this.querySelector('.su-demo').style.animation='none'; setTimeout(()=>{ this.querySelector('.su-demo').style.animation=''; }, 50)">
+        <div class="ds-motion-demo">
+          <div class="su-demo ds-animate-slideup-demo ds-motion-demo-box"></div>
+        </div>
+        <span class="ds-motion-name">Slide Up</span>
+        <span class="ds-motion-spec">slideUp .3s<br/>ease-out<br/>(click to replay)</span>
+      </div>
+
+      <!-- Blog Card Hover -->
+      <div class="ds-motion-card">
+        <div class="ds-motion-demo" style="overflow:hidden;border-radius:12px;padding:0;">
+          <div class="group" style="width:64px;height:64px;overflow:hidden;border-radius:12px;cursor:pointer;">
+            <img src="assets/b53e3117a1de1115_image.jpg" class="group-hover:scale-[1.05] transition-all ease-in-out" style="width:100%;height:100%;object-fit:cover;" />
+          </div>
+        </div>
+        <span class="ds-motion-name">Card Image Zoom</span>
+        <span class="ds-motion-spec">group-hover:scale<br/>[1.05]<br/>transition-all ease</span>
+      </div>
+
+      <!-- Scroll Reveal -->
+      <div class="ds-motion-card">
+        <div class="ds-motion-demo">
+          <div class="ds-reveal-box ds-motion-demo-box" id="scrollRevealDemo" style="opacity:0;transform:translateY(24px);"></div>
+        </div>
+        <span class="ds-motion-name">Scroll Reveal</span>
+        <span class="ds-motion-spec">IntersectionObserver<br/>opacity+translateY<br/>cubic-bezier(.16,1,.3,1)</span>
+      </div>
+
+      <!-- Accordion -->
+      <div class="ds-motion-card">
+        <div class="ds-motion-demo">
+          <div style="display:flex;flex-direction:column;gap:4px;width:100%;">
+            <div style="height:6px;width:32px;background:hsl(var(--primary));border-radius:3px;"></div>
+            <div style="height:6px;width:24px;background:hsl(var(--primary)/0.4);border-radius:3px;"></div>
+            <div style="height:6px;width:28px;background:hsl(var(--primary)/0.2);border-radius:3px;"></div>
+          </div>
+        </div>
+        <span class="ds-motion-name">Accordion Open/Close</span>
+        <span class="ds-motion-spec">accordion-down/up<br/>.2s ease-out<br/>height animate</span>
+      </div>
+    </div>
+
+    <!-- Easing reference -->
+    <p class="text-sm font-semibold mb-4 mt-12" style="color: hsl(var(--text-secondary));">Easing Reference</p>
+    <div style="display:flex;flex-direction:column;gap:0.75rem;">
+      <div style="display:flex;align-items:center;gap:1rem;">
+        <span style="font-size:11px;font-family:monospace;min-width:200px;color:hsl(var(--text-ternary));">ease-in-out</span>
+        <span style="font-size:11px;color:hsl(var(--text-ternary));">Default for all transitions (nav links, buttons, cards, images)</span>
+      </div>
+      <div style="display:flex;align-items:center;gap:1rem;">
+        <span style="font-size:11px;font-family:monospace;min-width:200px;color:hsl(var(--text-ternary));">cubic-bezier(.4,0,.6,1)</span>
+        <span style="font-size:11px;color:hsl(var(--text-ternary));">Pulse animation (loading skeleton)</span>
+      </div>
+      <div style="display:flex;align-items:center;gap:1rem;">
+        <span style="font-size:11px;font-family:monospace;min-width:200px;color:hsl(var(--text-ternary));">cubic-bezier(.16,1,.3,1)</span>
+        <span style="font-size:11px;color:hsl(var(--text-ternary));">Scroll reveal (progressive entrance, 0.6s)</span>
+      </div>
+      <div style="display:flex;align-items:center;gap:1rem;">
+        <span style="font-size:11px;font-family:monospace;min-width:200px;color:hsl(var(--text-ternary));">ease-out (.3s)</span>
+        <span style="font-size:11px;color:hsl(var(--text-ternary));">Slide-up modal / panel entrance</span>
+      </div>
+      <div style="display:flex;align-items:center;gap:1rem;">
+        <span style="font-size:11px;font-family:monospace;min-width:200px;color:hsl(var(--text-ternary));">linear (1s)</span>
+        <span style="font-size:11px;color:hsl(var(--text-ternary));">Spin / infinite loader</span>
+      </div>
+    </div>
+  </section>
+
+  <div class="ds-gradient-sep"></div>
+
+  <!-- ══════════════════════════════════════════════
+       6. ICONS
+  ══════════════════════════════════════════════ -->
+  <section id="icons" class="ds-section" style="padding: 5.5rem 5rem; max-width: 1200px; margin: 0 auto;">
+    <p class="ds-section-title">06 — Icons</p>
+    <p class="text-sm mb-8" style="color: hsl(var(--text-ternary));">All icons are inline SVG. Color is inherited from <code>currentColor</code> or hardcoded stroke/fill. Social icons are in circular bordered containers.</p>
+
+    <!-- UI Icons -->
+    <p class="text-sm font-semibold mb-4" style="color: hsl(var(--text-secondary));">UI Icons (20×20)</p>
+    <div class="ds-icon-grid" style="margin-bottom: 3rem;">
+      <div class="ds-icon-item">
+        <svg fill="none" height="20" width="20" xmlns="http://www.w3.org/2000/svg"><path d="m2.763 11.484.609-.143zm0-4.547.609.142zm12.895 0 .608-.143zm0 4.547.608.143zm-4.174 4.174-.143-.609zm-4.547 0-.143.608zm0-12.895-.143-.608zm4.547 0 .143-.608zm5.574 15.179a.625.625 0 1 0 .884-.884zm-13.686-6.6a9.3 9.3 0 0 1 0-4.263l-1.217-.285a10.6 10.6 0 0 0 0 4.833zm11.677-4.263a9.3 9.3 0 0 1 0 4.263l1.217.285c.373-1.59.373-3.244 0-4.833zm-3.707 7.97a9.3 9.3 0 0 1-4.263 0l-.285 1.217c1.59.373 3.244.373 4.833 0zM7.079 3.372a9.3 9.3 0 0 1 4.263 0l.285-1.217a10.6 10.6 0 0 0-4.833 0zm0 11.677a4.98 4.98 0 0 1-3.707-3.707l-1.217.285a6.23 6.23 0 0 0 4.639 4.64zm4.548 1.217a6.23 6.23 0 0 0 4.64-4.64l-1.218-.284a4.98 4.98 0 0 1-3.707 3.707zM11.34 3.372a4.98 4.98 0 0 1 3.708 3.707l1.217-.285a6.23 6.23 0 0 0-4.64-4.64zM6.795 2.155a6.23 6.23 0 0 0-4.64 4.639l1.218.285a4.98 4.98 0 0 1 3.707-3.707zm7.21 12.733 3.054 3.054.884-.884-3.054-3.054z" fill="#292A2E"></path></svg>
+        <span class="ds-icon-name">Search</span>
+      </div>
+      <div class="ds-icon-item">
+        <svg fill="none" height="20" width="20" xmlns="http://www.w3.org/2000/svg"><path d="M6.07 15.834h10.597m0-11.667H10.81M16.666 10H3.333" stroke="#292A2E" stroke-linecap="round" stroke-width="1.25"></path></svg>
+        <span class="ds-icon-name">Menu / Hamburger</span>
+      </div>
+      <div class="ds-icon-item">
+        <svg fill="none" height="16" width="16" xmlns="http://www.w3.org/2000/svg"><path d="M13.333 8H2.666M10 11.335S13.333 8.88 13.333 8c0-.878-3.333-3.333-3.333-3.333" stroke="#000" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+        <span class="ds-icon-name">Arrow Right</span>
+      </div>
+      <div class="ds-icon-item">
+        <svg fill="none" height="16" width="16" xmlns="http://www.w3.org/2000/svg" style="transform:rotate(180deg)"><path d="M13.333 8H2.666M10 11.335S13.333 8.88 13.333 8c0-.878-3.333-3.333-3.333-3.333" stroke="#000" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+        <span class="ds-icon-name">Arrow Left</span>
+      </div>
+      <div class="ds-icon-item">
+        <svg fill="none" height="20" width="20" xmlns="http://www.w3.org/2000/svg"><path d="m9.558 17.513-5.745-5.745a.625.625 0 0 1 .884-.884l4.678 4.679V2.929a.625.625 0 0 1 1.25 0v12.634l4.678-4.679a.625.625 0 0 1 .884.884l-5.745 5.745a.625.625 0 0 1-.884 0" fill="#262626"></path></svg>
+        <span class="ds-icon-name">Arrow Down</span>
+      </div>
+      <div class="ds-icon-item">
+        <svg aria-hidden="true" class="lucide lucide-chevron-up w-5 h-5 text-primary" fill="none" height="20" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><path d="m18 15-6-6-6 6"></path></svg>
+        <span class="ds-icon-name">Chevron Up<br/>(Lucide)</span>
+      </div>
+      <div class="ds-icon-item">
+        <svg aria-hidden="true" class="lucide lucide-chevron-down w-5 h-5 text-primary" fill="none" height="20" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><path d="m6 9 6 6 6-6"></path></svg>
+        <span class="ds-icon-name">Chevron Down<br/>(Lucide)</span>
+      </div>
+    </div>
+
+    <!-- Social Icons in containers -->
+    <p class="text-sm font-semibold mb-4" style="color: hsl(var(--text-secondary));">Social Icons — Circular bordered container (w-16 h-16, rounded-full, border-white/25, on dark)</p>
+    <div style="display:flex;gap:1rem;background:#000;padding:2rem;border-radius:16px;width:fit-content;">
+      <div class="flex justify-center items-center px-4 py-2 w-16 h-16 text-white rounded-full border border-white" style="border-opacity:0.25;">
+        <svg fill="none" height="21" width="21" xmlns="http://www.w3.org/2000/svg"><path d="M1.25 9.5c0-3.771 0-5.657 1.172-6.828S5.479 1.5 9.25 1.5h2c3.771 0 5.657 0 6.828 1.172S19.25 5.729 19.25 9.5v2c0 3.771 0 5.657-1.172 6.828S15.021 19.5 11.25 19.5h-2c-3.771 0-5.657 0-6.828-1.172S1.25 15.271 1.25 11.5z" stroke="currentColor" stroke-width="2"></path><path d="M14.75 7.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3" fill="currentColor"></path><path d="M10.25 13.5a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z" stroke="currentColor" stroke-width="2"></path></svg>
+      </div>
+      <div class="flex justify-center items-center px-4 py-2 w-16 h-16 text-white rounded-full border border-white" style="border-opacity:0.25;">
+        <svg fill="none" height="19" width="19" xmlns="http://www.w3.org/2000/svg"><path d="M16.75.5a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-14a2 2 0 0 1-2-2v-14a2 2 0 0 1 2-2zm-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.32 1.3V7.63H7.88V16h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4V16zM4.63 6.06a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68M6.02 16V7.63H3.25V16z" fill="currentColor"></path></svg>
+      </div>
+      <div class="flex justify-center items-center px-4 py-2 w-16 h-16 text-white rounded-full border border-white" style="border-opacity:0.25;">
+        <svg fill="none" height="15" width="21" xmlns="http://www.w3.org/2000/svg"><path d="m8.25 10.5 5.19-3-5.19-3zm11.56-7.83c.13.47.22 1.1.28 1.9.07.8.1 1.49.1 2.09l.06.84c0 2.19-.16 3.8-.44 4.83-.25.9-.83 1.48-1.73 1.73-.47.13-1.33.22-2.65.28-1.3.07-2.49.1-3.59.1l-1.59.06c-4.19 0-6.8-.16-7.83-.44-.9-.25-1.48-.83-1.73-1.73-.13-.47-.22-1.1-.28-1.9-.07-.8-.1-1.49-.1-2.09L.25 7.5c0-2.19.16-3.8.44-4.83.25-.9.83-1.48 1.73-1.73C2.89.81 3.75.72 5.07.66c1.3-.07 2.49-.1 3.59-.1L10.25.5c4.19 0 6.8.16 7.83.44.9.25 1.48.83 1.73 1.73" fill="currentColor"></path></svg>
+      </div>
+      <div class="flex justify-center items-center px-4 py-2 w-16 h-16 text-white rounded-full border border-white" style="border-opacity:0.25;">
+        <svg fill="none" height="21" width="11" xmlns="http://www.w3.org/2000/svg"><path d="M7.5 12H10l1-4H7.5V6c0-1.03 0-2 2-2H11V.64C10.674.597 9.443.5 8.143.5 5.428.5 3.5 2.157 3.5 5.2V8h-3v4h3v8.5h4z" fill="currentColor"></path></svg>
+      </div>
+    </div>
+
+    <!-- Icon size variants -->
+    <p class="text-sm font-semibold mb-4 mt-8" style="color: hsl(var(--text-secondary));">Size Variants (Search icon, color inheritance)</p>
+    <div style="display:flex;align-items:center;gap:2rem;">
+      <div style="display:flex;flex-direction:column;align-items:center;gap:0.5rem;">
+        <svg fill="none" height="16" width="16" xmlns="http://www.w3.org/2000/svg"><path d="m2.763 11.484.609-.143zm0-4.547.609.142zm12.895 0 .608-.143zm0 4.547.608.143zm-4.174 4.174-.143-.609zm-4.547 0-.143.608zm0-12.895-.143-.608zm4.547 0 .143-.608zm5.574 15.179a.625.625 0 1 0 .884-.884zm-13.686-6.6a9.3 9.3 0 0 1 0-4.263l-1.217-.285a10.6 10.6 0 0 0 0 4.833zm11.677-4.263a9.3 9.3 0 0 1 0 4.263l1.217.285c.373-1.59.373-3.244 0-4.833zm-3.707 7.97a9.3 9.3 0 0 1-4.263 0l-.285 1.217c1.59.373 3.244.373 4.833 0zM7.079 3.372a9.3 9.3 0 0 1 4.263 0l.285-1.217a10.6 10.6 0 0 0-4.833 0zm0 11.677a4.98 4.98 0 0 1-3.707-3.707l-1.217.285a6.23 6.23 0 0 0 4.639 4.64zm4.548 1.217a6.23 6.23 0 0 0 4.64-4.64l-1.218-.284a4.98 4.98 0 0 1-3.707 3.707zM11.34 3.372a4.98 4.98 0 0 1 3.708 3.707l1.217-.285a6.23 6.23 0 0 0-4.64-4.64zM6.795 2.155a6.23 6.23 0 0 0-4.64 4.639l1.218.285a4.98 4.98 0 0 1 3.707-3.707zm7.21 12.733 3.054 3.054.884-.884-3.054-3.054z" fill="#292A2E"></path></svg>
+        <span style="font-size:10px;color:hsl(var(--text-ternary));">16px</span>
+      </div>
+      <div style="display:flex;flex-direction:column;align-items:center;gap:0.5rem;">
+        <svg fill="none" height="20" width="20" xmlns="http://www.w3.org/2000/svg"><path d="m2.763 11.484.609-.143zm0-4.547.609.142zm12.895 0 .608-.143zm0 4.547.608.143zm-4.174 4.174-.143-.609zm-4.547 0-.143.608zm0-12.895-.143-.608zm4.547 0 .143-.608zm5.574 15.179a.625.625 0 1 0 .884-.884zm-13.686-6.6a9.3 9.3 0 0 1 0-4.263l-1.217-.285a10.6 10.6 0 0 0 0 4.833zm11.677-4.263a9.3 9.3 0 0 1 0 4.263l1.217.285c.373-1.59.373-3.244 0-4.833zm-3.707 7.97a9.3 9.3 0 0 1-4.263 0l-.285 1.217c1.59.373 3.244.373 4.833 0zM7.079 3.372a9.3 9.3 0 0 1 4.263 0l.285-1.217a10.6 10.6 0 0 0-4.833 0zm0 11.677a4.98 4.98 0 0 1-3.707-3.707l-1.217.285a6.23 6.23 0 0 0 4.639 4.64zm4.548 1.217a6.23 6.23 0 0 0 4.64-4.64l-1.218-.284a4.98 4.98 0 0 1-3.707 3.707zM11.34 3.372a4.98 4.98 0 0 1 3.708 3.707l1.217-.285a6.23 6.23 0 0 0-4.64-4.64zM6.795 2.155a6.23 6.23 0 0 0-4.64 4.639l1.218.285a4.98 4.98 0 0 1 3.707-3.707zm7.21 12.733 3.054 3.054.884-.884-3.054-3.054z" fill="#292A2E"></path></svg>
+        <span style="font-size:10px;color:hsl(var(--text-ternary));">20px (default)</span>
+      </div>
+      <div style="display:flex;flex-direction:column;align-items:center;gap:0.5rem;">
+        <svg fill="none" height="24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="m2.763 11.484.609-.143zm0-4.547.609.142zm12.895 0 .608-.143zm0 4.547.608.143zm-4.174 4.174-.143-.609zm-4.547 0-.143.608zm0-12.895-.143-.608zm4.547 0 .143-.608zm5.574 15.179a.625.625 0 1 0 .884-.884zm-13.686-6.6a9.3 9.3 0 0 1 0-4.263l-1.217-.285a10.6 10.6 0 0 0 0 4.833zm11.677-4.263a9.3 9.3 0 0 1 0 4.263l1.217.285c.373-1.59.373-3.244 0-4.833zm-3.707 7.97a9.3 9.3 0 0 1-4.263 0l-.285 1.217c1.59.373 3.244.373 4.833 0zM7.079 3.372a9.3 9.3 0 0 1 4.263 0l.285-1.217a10.6 10.6 0 0 0-4.833 0zm0 11.677a4.98 4.98 0 0 1-3.707-3.707l-1.217.285a6.23 6.23 0 0 0 4.639 4.64zm4.548 1.217a6.23 6.23 0 0 0 4.64-4.64l-1.218-.284a4.98 4.98 0 0 1-3.707 3.707zM11.34 3.372a4.98 4.98 0 0 1 3.708 3.707l1.217-.285a6.23 6.23 0 0 0-4.64-4.64zM6.795 2.155a6.23 6.23 0 0 0-4.64 4.639l1.218.285a4.98 4.98 0 0 1 3.707-3.707zm7.21 12.733 3.054 3.054.884-.884-3.054-3.054z" fill="#AB1A2D"></path></svg>
+        <span style="font-size:10px;color:hsl(var(--text-ternary));">24px (primary)</span>
+      </div>
+      <div style="display:flex;flex-direction:column;align-items:center;gap:0.5rem;background:#1a1a1a;padding:0.5rem;border-radius:8px;">
+        <svg fill="none" height="20" width="20" xmlns="http://www.w3.org/2000/svg" style="color:white;"><path d="m2.763 11.484.609-.143zm0-4.547.609.142zm12.895 0 .608-.143zm0 4.547.608.143zm-4.174 4.174-.143-.609zm-4.547 0-.143.608zm0-12.895-.143-.608zm4.547 0 .143-.608zm5.574 15.179a.625.625 0 1 0 .884-.884zm-13.686-6.6a9.3 9.3 0 0 1 0-4.263l-1.217-.285a10.6 10.6 0 0 0 0 4.833zm11.677-4.263a9.3 9.3 0 0 1 0 4.263l1.217.285c.373-1.59.373-3.244 0-4.833zm-3.707 7.97a9.3 9.3 0 0 1-4.263 0l-.285 1.217c1.59.373 3.244.373 4.833 0zM7.079 3.372a9.3 9.3 0 0 1 4.263 0l.285-1.217a10.6 10.6 0 0 0-4.833 0zm0 11.677a4.98 4.98 0 0 1-3.707-3.707l-1.217.285a6.23 6.23 0 0 0 4.639 4.64zm4.548 1.217a6.23 6.23 0 0 0 4.64-4.64l-1.218-.284a4.98 4.98 0 0 1-3.707 3.707zM11.34 3.372a4.98 4.98 0 0 1 3.708 3.707l1.217-.285a6.23 6.23 0 0 0-4.64-4.64zM6.795 2.155a6.23 6.23 0 0 0-4.64 4.639l1.218.285a4.98 4.98 0f 3.707-3.707zm7.21 12.733 3.054 3.054.884-.884-3.054-3.054z" fill="currentColor"></path></svg>
+        <span style="font-size:10px;color:rgba(255,255,255,0.5);">on dark</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════
+       FOOTER (same as original)
+  ══════════════════════════════════════════════ -->
+  <footer class="flex relative justify-center items-center w-screen transition-all duration-700 ease-in-out" style="padding: 88px; transform: none; transform-origin: 50% 50% 0px;">
+    <div class="flex items-center p-8 sm:p-20 2xl:p-[88px] justify-center w-screen transition-all duration-700 ease-in-out bg-black" style="border-radius: 32px; max-width: 1400px; transform: none; transform-origin: 50% 50% 0px;">
+      <div class="w-full max-w-[1400px]">
+        <div class="flex flex-col gap-10 justify-between items-center w-full md:flex-row h-fit">
+          <img alt="Moura Dubeux" class="md:w-[400px]" decoding="async" height="200" loading="lazy" src="assets/9c69028bc4d08f61_image.png" style="color:transparent;height:80px;width:auto;" />
+          <div class="flex flex-row gap-2 p-4 px-0 py-6 rounded-2xl sm:gap-4">
+            <div class="flex justify-center items-center px-4 py-2 w-16 h-16 text-white rounded-full border border-white" style="border-opacity:0.25;">
+              <svg fill="none" height="21" width="21" xmlns="http://www.w3.org/2000/svg"><path d="M1.25 9.5c0-3.771 0-5.657 1.172-6.828S5.479 1.5 9.25 1.5h2c3.771 0 5.657 0 6.828 1.172S19.25 5.729 19.25 9.5v2c0 3.771 0 5.657-1.172 6.828S15.021 19.5 11.25 19.5h-2c-3.771 0-5.657 0-6.828-1.172S1.25 15.271 1.25 11.5z" stroke="currentColor" stroke-width="2"></path><path d="M14.75 7.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3" fill="currentColor"></path><path d="M10.25 13.5a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z" stroke="currentColor" stroke-width="2"></path></svg>
+            </div>
+            <div class="flex justify-center items-center px-4 py-2 w-16 h-16 text-white rounded-full border border-white" style="border-opacity:0.25;">
+              <svg fill="none" height="19" width="19" xmlns="http://www.w3.org/2000/svg"><path d="M16.75.5a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-14a2 2 0 0 1-2-2v-14a2 2 0 0 1 2-2zm-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.32 1.3V7.63H7.88V16h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4V16zM4.63 6.06a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68M6.02 16V7.63H3.25V16z" fill="currentColor"></path></svg>
+            </div>
+            <div class="flex justify-center items-center px-4 py-2 w-16 h-16 text-white rounded-full border border-white" style="border-opacity:0.25;">
+              <svg fill="none" height="15" width="21" xmlns="http://www.w3.org/2000/svg"><path d="m8.25 10.5 5.19-3-5.19-3zm11.56-7.83c.13.47.22 1.1.28 1.9.07.8.1 1.49.1 2.09l.06.84c0 2.19-.16 3.8-.44 4.83-.25.9-.83 1.48-1.73 1.73-.47.13-1.33.22-2.65.28-1.3.07-2.49.1-3.59.1l-1.59.06c-4.19 0-6.8-.16-7.83-.44-.9-.25-1.48-.83-1.73-1.73-.13-.47-.22-1.1-.28-1.9-.07-.8-.1-1.49-.1-2.09L.25 7.5c0-2.19.16-3.8.44-4.83.25-.9.83-1.48 1.73-1.73C2.89.81 3.75.72 5.07.66c1.3-.07 2.49-.1 3.59-.1L10.25.5c4.19 0 6.8.16 7.83.44.9.25 1.48.83 1.73 1.73" fill="currentColor"></path></svg>
+            </div>
+            <div class="flex justify-center items-center px-4 py-2 w-16 h-16 text-white rounded-full border border-white" style="border-opacity:0.25;">
+              <svg fill="none" height="21" width="11" xmlns="http://www.w3.org/2000/svg"><path d="M7.5 12H10l1-4H7.5V6c0-1.03 0-2 2-2H11V.64C10.674.597 9.443.5 8.143.5 5.428.5 3.5 2.157 3.5 5.2V8h-3v4h3v8.5h4z" fill="currentColor"></path></svg>
+            </div>
+          </div>
+        </div>
+        <div class="flex flex-col gap-8 justify-between mt-16 w-full md:flex-row">
+          <div class="flex flex-col gap-8 text-sm text-white md:flex-row md:gap-36">
+            <div class="flex flex-col gap-4">
+              <a class="text-white hover:opacity-70 transition-all" href="assets/ca52f9b0fd10cab1_quem-somos.html">Quem somos</a>
+              <a class="text-white hover:opacity-70 transition-all" href="assets/c396996db16a88fc_nossos-imoveis.html">Nossos imóveis</a>
+              <a class="text-white hover:opacity-70 transition-all" href="assets/0d7e18253f0e8c89_trabalhe-com-a-gente.html">Carreiras</a>
+              <a class="text-white hover:opacity-70 transition-all" href="assets/bfac30e6601fa613_blog.html">Blog</a>
+              <a class="text-white hover:opacity-70 transition-all" href="assets/0980374943e0bb13_materiais-exclusivos.html">Materiais Exclusivos</a>
+            </div>
+            <div class="flex flex-col gap-4">
+              <a class="text-white hover:opacity-70 transition-all" href="assets/07ec24cb65f12860_privacidade.html">Portal de Privacidade</a>
+              <a class="text-white hover:opacity-70 transition-all" href="assets/e1accfe11c16b05d_politicas-sustentaveis.html">Políticas Sustentáveis</a>
+              <a class="text-white hover:opacity-70 transition-all" href="assets/1d8ee0e72950a989_programa-de-integridade.html">Programa de Integridade</a>
+              <a class="text-white hover:opacity-70 transition-all" href="assets/84cad7ee3abbe763_cookies.html">Cookies</a>
+              <a class="text-white hover:opacity-70 transition-all" href="assets/756a77c65ee31eca_faq.html">FAQ</a>
+            </div>
+          </div>
+          <div class="flex flex-col gap-4">
+            <p class="text-white text-xs opacity-50">© 2026 Moura Dubeux. Todos os direitos reservados.</p>
+            <p class="text-white text-xs opacity-30">Design System · v1.0</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Scroll reveal for the demo box
+    (function() {
+      var el = document.getElementById('scrollRevealDemo');
+      if (!el) return;
+      var io = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+          if (entry.isIntersecting) {
+            el.classList.add('visible');
+            io.unobserve(el);
+          }
+        });
+      }, { threshold: 0.3 });
+      io.observe(el);
+    })();
+
+    // Smooth scroll for DS nav links
+    document.querySelectorAll('.ds-topnav a[href^="#"]').forEach(function(a) {
+      a.addEventListener('click', function(e) {
+        e.preventDefault();
+        var target = document.querySelector(a.getAttribute('href'));
+        if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
+    });
+
+    // Highlight active nav item on scroll
+    var sections = ['hero','typography','colors','components','layout','motion','icons'];
+    window.addEventListener('scroll', function() {
+      var scrollY = window.scrollY + 120;
+      sections.forEach(function(id) {
+        var sec = document.getElementById(id);
+        var link = document.querySelector('.ds-topnav a[href="#' + id + '"]');
+        if (!sec || !link) return;
+        var top = sec.offsetTop;
+        var bottom = top + sec.offsetHeight;
+        if (scrollY >= top && scrollY < bottom) {
+          link.style.color = 'hsl(352,74%,39%)';
+          link.style.borderBottomColor = 'hsl(352,74%,39%)';
+        } else {
+          link.style.color = '';
+          link.style.borderBottomColor = '';
+        }
+      });
+    });
+  </script>
+</body>
+</html>
