@@ -1,4 +1,4 @@
-import teamImgSrc from '../imagens/sobre_empresa.png'
+import teamImgSrc from '../../imagens/sobre_empresa.png'
 const teamImg = teamImgSrc
 const bgObra = 'https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=2000&q=80'
 
