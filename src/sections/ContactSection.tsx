@@ -99,7 +99,7 @@ export function ContactSection() {
                 </div>
                 <div>
                   <p className="contact-row-label">Endereço</p>
-                  <p className="contact-row-value">São Paulo, SP · Brasil</p>
+                  <p className="contact-row-value">Recife, PE · Brasil</p>
                 </div>
               </div>
             </div>

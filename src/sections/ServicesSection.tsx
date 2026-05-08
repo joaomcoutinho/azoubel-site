@@ -4,6 +4,10 @@ const imgGestao =
 const imgPlan = `${base}imagens/planejamento.png`
 const imgOrn = `${base}imagens/ornamentacao.png`
 
+function scrollToSection(id: string) {
+  document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' })
+}
+
 export function ServicesSection() {
   return (
     <section id="servicos" className="sc sc-warm">
@@ -26,9 +30,9 @@ export function ServicesSection() {
               Coordenação completa da execução, acompanhamento técnico e controle operacional para
               garantir maior previsibilidade e qualidade na entrega.
             </p>
-            <a className="btn btn-primary" href="#contato">
+            <button type="button" className="btn btn-primary" onClick={() => scrollToSection('contato')}>
               Solicitar avaliação
-            </a>
+            </button>
           </div>
         </div>
         <div className="service-row rev anim-fade">
@@ -41,9 +45,9 @@ export function ServicesSection() {
               Estruturação de cronogramas, organização de etapas, monitoramento de desempenho e
               acompanhamento contínuo da obra.
             </p>
-            <a className="btn btn-primary" href="#contato">
+            <button type="button" className="btn btn-primary" onClick={() => scrollToSection('contato')}>
               Falar com especialista
-            </a>
+            </button>
           </div>
         </div>
         <div className="service-row anim-fade">
@@ -56,9 +60,9 @@ export function ServicesSection() {
               Execução e desenvolvimento de soluções com foco estético, funcionalidade e integração com
               o projeto arquitetônico.
             </p>
-            <a className="btn btn-primary" href="#portfolio">
+            <button type="button" className="btn btn-primary" onClick={() => scrollToSection('portfolio')}>
               Conhecer serviço
-            </a>
+            </button>
           </div>
         </div>
       </div>

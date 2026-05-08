@@ -1639,10 +1639,21 @@ textarea.ds-input {
       "num  body"
       "ttl  body";
     aspect-ratio: auto !important;
-    min-height: 96px !important;
+    /* Padroniza altura dos cards no mobile usando o card 3 como referência */
+    min-height: 152px !important;
+    height: 152px !important;
     padding: var(--sp-5) var(--sp-5) !important;
     border-radius: var(--r-lg);
     align-items: start;
+    overflow: hidden;
+  }
+
+  /* Garante que o corpo não estoure a altura padronizada */
+  .ptl-card-body {
+    display: -webkit-box;
+    -webkit-line-clamp: 5;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
   }
 
   .ptl-card-watermark {

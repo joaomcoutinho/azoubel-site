@@ -1,6 +1,18 @@
 import { ChevronDown } from 'lucide-react'
 
 export function HeroSection() {
+  const scrollToSection = (id: string) => (e: React.MouseEvent) => {
+    e.preventDefault()
+    const el = document.getElementById(id)
+    if (el) {
+      el.scrollIntoView({ behavior: 'smooth', block: 'start' })
+      // Update URL hash without triggering native jump
+      if (history.replaceState) {
+        history.replaceState(null, '', `#${id}`)
+      }
+    }
+  }
+
   return (
     <section id="hero" className="hero-section">
       <div className="hero-vignette" aria-hidden />
@@ -21,11 +33,11 @@ export function HeroSection() {
             organizadas, acompanhadas em tempo real e conduzidas por uma equipe tecnicamente qualificada.
           </p>
           <div className="hero-actions anim-fade d3">
-            <a className="btn btn-primary-solid" href="#contato">
+            <a className="btn btn-primary-solid" href="#contato" onClick={scrollToSection('contato')}>
               Solicitar orçamento
             </a>
-            <a className="btn btn-ghost-dark" href="#portfolio">
-              Conhecer projetos
+            <a className="btn btn-ghost-dark" href="#processo" onClick={scrollToSection('processo')}>
+              Ver processo
             </a>
           </div>
         </div>
@@ -49,7 +61,7 @@ export function HeroSection() {
           </div>
         </div>
 
-        <a className="hero-scroll-affordance" href="#processo">
+        <a className="hero-scroll-affordance" href="#processo" onClick={scrollToSection('processo')}>
           <span>Nosso processo</span>
           <ChevronDown size={18} strokeWidth={1.75} aria-hidden />
         </a>

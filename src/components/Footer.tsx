@@ -41,7 +41,7 @@ export function Footer() {
       </div>
       <div className="footer-bottom">
         <p>© {new Date().getFullYear()} Azoubel Engenharia. Todos os direitos reservados.</p>
-        <p>Engenharia · Gestão de obras · São Paulo</p>
+        <p>Engenharia · Gestão de obras · Recife-PE</p>
       </div>
     </footer>
   )

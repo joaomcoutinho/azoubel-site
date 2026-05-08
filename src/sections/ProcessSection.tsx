@@ -1,5 +1,9 @@
 import { processSteps } from '../data/process'
 
+function scrollToSection(id: string) {
+  document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' })
+}
+
 export function ProcessSection() {
   const base = import.meta.env.BASE_URL
   const bgByIndex = [
@@ -49,9 +53,9 @@ export function ProcessSection() {
         </div>
 
         <div className="process-cta-wrap">
-          <a className="btn btn-primary-solid" href="#contato">
+          <button type="button" className="btn btn-primary-solid" onClick={() => scrollToSection('contato')}>
             Solicite seu orçamento
-          </a>
+          </button>
         </div>
       </div>
     </section>
