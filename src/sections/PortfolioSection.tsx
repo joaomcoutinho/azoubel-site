@@ -15,7 +15,7 @@ export type PortfolioFilter =
 const filterLabels: { key: PortfolioFilter; label: string }[] = [
   { key: 'todos', label: 'Todos os projetos' },
   { key: 'gestao', label: 'Gestão de obras' },
-  { key: 'execucao', label: 'Execução' },
+  { key: 'planejamento', label: 'planejamento' },
   { key: 'ornamentacao', label: 'Ornamentação' },
   { key: 'concluido', label: 'Projetos concluídos' },
   { key: 'andamento', label: 'Projetos em andamento' },
@@ -23,7 +23,7 @@ const filterLabels: { key: PortfolioFilter; label: string }[] = [
 
 function categoryLabel(c: ProjectCategory): string {
   if (c === 'gestao') return 'Gestão de obras'
-  if (c === 'execucao') return 'Execução'
+  if (c === 'planejamento') return 'planejamento'
   return 'Ornamentação'
 }
 
