@@ -1,4 +1,4 @@
-export type ProjectCategory = 'gestao' | 'planejamento' | 'ornamentacao'
+export type ProjectCategory = 'gestao' | 'planejamento' | 'execucao' | 'ornamentacao'
 export type ProjectStatus = 'concluido' | 'andamento'
 
 export interface Project {
