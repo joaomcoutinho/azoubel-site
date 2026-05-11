@@ -9,12 +9,14 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@rollup/rollup-linux-arm64-gnu": "^4.60.3",
     "framer-motion": "^12.38.0",
     "lucide-react": "^0.511.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-router-dom": "^7.6.0"
+  },
+  "optionalDependencies": {
+    "@rollup/rollup-linux-arm64-gnu": "^4.60.3"
   },
   "devDependencies": {
     "@types/react": "^19.0.0",
