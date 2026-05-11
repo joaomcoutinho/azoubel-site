@@ -1,6 +1,11 @@
 export type ProjectCategory = 'gestao' | 'planejamento' | 'execucao' | 'ornamentacao'
 export type ProjectStatus = 'concluido' | 'andamento'
 
+export interface ProjectHighlight {
+  value: string
+  label: string
+}
+
 export interface Project {
   slug: string
   name: string
@@ -15,4 +20,5 @@ export interface Project {
   solutions: string
   executionStatus: string
   technicalInfo: string
+  highlights?: ProjectHighlight[]
 }

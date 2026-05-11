@@ -4,6 +4,7 @@ import { FloatingNav } from './components/FloatingNav'
 import { Footer } from './components/Footer'
 import { HomePage } from './pages/HomePage'
 import { ProjectPage } from './pages/ProjectPage'
+import { ProjectsPage } from './pages/ProjectsPage'
 
 export default function App() {
   const { pathname } = useLocation()
@@ -48,6 +49,7 @@ export default function App() {
       <FloatingNav />
       <Routes>
         <Route path="/" element={<HomePage />} />
+        <Route path="/projetos" element={<ProjectsPage />} />
         <Route path="/projetos/:slug" element={<ProjectPage />} />
       </Routes>
       <Footer />

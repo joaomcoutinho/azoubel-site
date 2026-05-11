@@ -2603,3 +2603,1111 @@ details[open] > .diff-acc-summary::after {
 .back-link:hover {
   color: var(--text-inv);
 }
+
+/* ─────────────────────────────────────────────
+   Portfolio — Obra em Capítulos
+   ───────────────────────────────────────────── */
+
+.chap-section {
+  display: flex;
+  flex-direction: column;
+}
+
+.chap-layout {
+  display: grid;
+  grid-template-columns: 44% 1fr;
+  height: calc(100svh - 20px);
+  min-height: 580px;
+}
+
+/* ── Left panel ── */
+.chap-left {
+  display: flex;
+  flex-direction: column;
+  padding: var(--sp-12) var(--sp-12) var(--sp-10);
+  overflow: hidden;
+  position: relative;
+}
+
+.chap-section-label {
+  flex-shrink: 0;
+  margin-bottom: var(--sp-8);
+}
+
+.chap-content-wrap {
+  flex: 1;
+  position: relative;
+  overflow: hidden;
+  min-height: 0;
+}
+
+.chap-content {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-right: var(--sp-4);
+}
+
+/* Counter */
+.chap-counter {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: var(--sp-5);
+}
+
+.chap-num {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  color: rgba(250, 249, 246, 0.55);
+}
+
+.chap-counter-sep {
+  width: 24px;
+  height: 1px;
+  background: rgba(250, 249, 246, 0.2);
+  display: block;
+}
+
+.chap-total {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  color: rgba(250, 249, 246, 0.22);
+}
+
+/* Tags */
+.chap-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp-2);
+  margin-bottom: var(--sp-5);
+}
+
+/* Title */
+.chap-title {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 3.5vw, 3.2rem);
+  font-weight: 600;
+  color: var(--text-inv);
+  line-height: 1.04;
+  letter-spacing: -0.02em;
+  margin-bottom: 6px;
+}
+
+/* Location */
+.chap-location {
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(250, 249, 246, 0.38);
+  margin-bottom: var(--sp-6);
+  font-family: var(--font-body);
+}
+
+/* Overview */
+.chap-overview {
+  font-size: 14px;
+  line-height: 1.68;
+  color: rgba(250, 249, 246, 0.62);
+  max-width: 400px;
+  margin-bottom: var(--sp-7);
+}
+
+/* Highlights */
+.chap-highlights {
+  display: flex;
+  gap: var(--sp-8);
+  padding: var(--sp-5) 0;
+  border-top: 1px solid rgba(250, 249, 246, 0.1);
+  border-bottom: 1px solid rgba(250, 249, 246, 0.1);
+  margin-bottom: var(--sp-7);
+}
+
+.chap-hl {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.chap-hl-value {
+  font-family: var(--font-display);
+  font-size: clamp(1.4rem, 2.2vw, 1.9rem);
+  font-weight: 600;
+  color: var(--text-inv);
+  line-height: 1;
+  letter-spacing: -0.01em;
+}
+
+.chap-hl-label {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(250, 249, 246, 0.35);
+  font-family: var(--font-body);
+}
+
+/* CTA */
+.chap-cta {
+  width: fit-content;
+  font-size: 13px;
+  min-height: 44px;
+  padding: 0 var(--sp-6);
+  gap: var(--sp-2);
+}
+
+/* Navigation */
+.chap-nav {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3);
+  margin-top: var(--sp-6);
+}
+
+.chap-nav-btn {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  border: 1px solid rgba(250, 249, 246, 0.2);
+  background: transparent;
+  color: rgba(250, 249, 246, 0.7);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition:
+    background var(--dur-fast) ease,
+    border-color var(--dur-fast) ease,
+    color var(--dur-fast) ease;
+  flex-shrink: 0;
+}
+
+.chap-nav-btn:hover:not(:disabled) {
+  background: rgba(250, 249, 246, 0.1);
+  border-color: rgba(250, 249, 246, 0.4);
+  color: var(--text-inv);
+}
+
+.chap-nav-btn:disabled {
+  opacity: 0.2;
+  cursor: not-allowed;
+}
+
+.chap-dots {
+  display: flex;
+  gap: 7px;
+  align-items: center;
+}
+
+.chap-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: rgba(250, 249, 246, 0.25);
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  transition:
+    width 0.35s var(--ease-out-expo),
+    background 0.25s ease,
+    border-radius 0.35s ease;
+}
+
+.chap-dot.on {
+  width: 22px;
+  border-radius: 3px;
+  background: var(--text-inv);
+}
+
+.chap-scroll-hint {
+  margin-left: auto;
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(250, 249, 246, 0.18);
+  font-family: var(--font-body);
+  white-space: nowrap;
+  user-select: none;
+}
+
+/* ── Right panel ── */
+.chap-right {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.chap-photo {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  will-change: transform, opacity;
+  /* Softens the vertical seam between text panel and photo
+     so the image dissolves into the dark gradient — no harsh edge */
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    rgba(0, 0, 0, 0.35) 4%,
+    rgba(0, 0, 0, 0.85) 11%,
+    #000 18%
+  );
+  mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    rgba(0, 0, 0, 0.35) 4%,
+    rgba(0, 0, 0, 0.85) 11%,
+    #000 18%
+  );
+}
+
+/* Multi-directional cinematic vignette for depth + readability */
+.chap-photo-vignette {
+  position: absolute;
+  inset: 0;
+  background:
+    /* Left blend — reinforces the dissolve into the dark panel */
+    linear-gradient(
+      to right,
+      rgba(14, 14, 20, 0.78) 0%,
+      rgba(14, 14, 20, 0.32) 9%,
+      transparent 24%
+    ),
+    /* Bottom darkening — anchors the watermark */
+    linear-gradient(
+      to top,
+      rgba(11, 13, 24, 0.78) 0%,
+      rgba(11, 13, 24, 0.18) 28%,
+      transparent 48%
+    ),
+    /* Top fade — recedes the upper edge gently */
+    linear-gradient(
+      to bottom,
+      rgba(11, 13, 24, 0.42) 0%,
+      transparent 22%
+    ),
+    /* Corner mood — top-right shadow for the numeral readability */
+    radial-gradient(
+      ellipse 80% 60% at 85% 8%,
+      rgba(11, 13, 24, 0.45) 0%,
+      transparent 70%
+    );
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Whisper-thin architectural grid — signals technical precision */
+.chap-photo-grid {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0.5;
+  background-image:
+    linear-gradient(rgba(250, 249, 246, 0.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(250, 249, 246, 0.025) 1px, transparent 1px);
+  background-size: 96px 96px;
+  background-position: -1px -1px;
+  mix-blend-mode: screen;
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    #000 22%,
+    #000 80%,
+    rgba(0, 0, 0, 0.6) 100%
+  );
+  mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    #000 22%,
+    #000 80%,
+    rgba(0, 0, 0, 0.6) 100%
+  );
+}
+
+/* Horizontal scan line — sweeps top→bottom on project change */
+.chap-scanline {
+  position: absolute;
+  left: 18%;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(
+    to right,
+    transparent 0%,
+    rgba(250, 249, 246, 0.0) 5%,
+    rgba(250, 249, 246, 0.55) 50%,
+    rgba(250, 249, 246, 0.0) 95%,
+    transparent 100%
+  );
+  pointer-events: none;
+  z-index: 2;
+  filter: blur(0.4px);
+}
+
+/* Inset decorative frame — gives the photo perceptual breathing room */
+.chap-frame {
+  position: absolute;
+  top: var(--sp-8);
+  right: var(--sp-8);
+  bottom: var(--sp-8);
+  left: clamp(var(--sp-10), 12%, 110px);
+  pointer-events: none;
+  z-index: 3;
+}
+
+/* Corner registration marks — architectural blueprint feel */
+.chap-corner {
+  position: absolute;
+  width: 22px;
+  height: 22px;
+  border: 1px solid rgba(250, 249, 246, 0.4);
+  transition: border-color var(--dur-base) ease;
+}
+.chap-corner-tl {
+  top: 0;
+  left: 0;
+  border-right: none;
+  border-bottom: none;
+}
+.chap-corner-tr {
+  top: 0;
+  right: 0;
+  border-left: none;
+  border-bottom: none;
+}
+.chap-corner-bl {
+  bottom: 0;
+  left: 0;
+  border-right: none;
+  border-top: none;
+}
+.chap-corner-br {
+  bottom: 0;
+  right: 0;
+  border-left: none;
+  border-top: none;
+}
+
+/* Ghost numeral — huge typographic anchor */
+.chap-numeral {
+  position: absolute;
+  top: -0.18em;
+  right: var(--sp-3);
+  font-family: var(--font-display);
+  font-size: clamp(7rem, 13vw, 14rem);
+  font-weight: 500;
+  line-height: 0.85;
+  letter-spacing: -0.05em;
+  color: rgba(250, 249, 246, 0.085);
+  user-select: none;
+  pointer-events: none;
+  font-feature-settings: 'lnum', 'tnum';
+  font-variant-numeric: lining-nums tabular-nums;
+  text-shadow: 0 8px 30px rgba(0, 0, 0, 0.25);
+}
+
+.chap-numeral span {
+  display: inline-block;
+}
+
+/* Vertical metadata strip on the left edge of the frame */
+.chap-side-meta {
+  position: absolute;
+  left: -6px;
+  top: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  pointer-events: none;
+}
+
+.chap-side-row {
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3);
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(250, 249, 246, 0.55);
+}
+
+.chap-side-label {
+  color: rgba(250, 249, 246, 0.32);
+}
+
+.chap-side-divider {
+  width: 1px;
+  height: 28px;
+  background: rgba(250, 249, 246, 0.28);
+  flex-shrink: 0;
+}
+
+.chap-side-value {
+  color: rgba(250, 249, 246, 0.78);
+  font-weight: 500;
+}
+
+/* Refined watermark */
+.chap-photo-watermark {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  text-align: right;
+  pointer-events: none;
+}
+
+.chap-photo-watermark > div {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 10px;
+}
+
+.chap-wm-kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sp-3);
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(250, 249, 246, 0.55);
+}
+
+.chap-wm-tick {
+  display: inline-block;
+  width: 22px;
+  height: 1px;
+  background: rgba(250, 249, 246, 0.4);
+}
+
+.chap-wm-name {
+  font-family: var(--font-display);
+  font-size: clamp(1.15rem, 2vw, 1.7rem);
+  font-weight: 500;
+  font-style: italic;
+  color: rgba(250, 249, 246, 0.92);
+  letter-spacing: -0.005em;
+  line-height: 1;
+}
+
+/* Progress bar — refined */
+.chap-progress {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: rgba(250, 249, 246, 0.06);
+  pointer-events: none;
+  z-index: 4;
+}
+
+.chap-progress-fill {
+  height: 100%;
+  background: linear-gradient(
+    to right,
+    rgba(250, 249, 246, 0.35) 0%,
+    rgba(250, 249, 246, 0.85) 100%
+  );
+  border-radius: 0 1px 1px 0;
+  will-change: width;
+  box-shadow: 0 0 12px rgba(250, 249, 246, 0.25);
+}
+
+/* ── Responsive ── */
+@media (max-width: 860px) {
+  .chap-section {
+    height: auto;
+    min-height: unset;
+  }
+
+  .chap-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .chap-right {
+    height: 56vw;
+    min-height: 240px;
+    order: -1;
+  }
+
+  /* On mobile, photo bleeds fully — no left-edge mask */
+  .chap-photo {
+    -webkit-mask-image: none;
+    mask-image: none;
+  }
+
+  .chap-photo-vignette {
+    background:
+      linear-gradient(
+        to top,
+        rgba(11, 13, 24, 0.82) 0%,
+        rgba(11, 13, 24, 0.15) 35%,
+        transparent 60%
+      ),
+      linear-gradient(
+        to bottom,
+        rgba(11, 13, 24, 0.35) 0%,
+        transparent 30%
+      );
+  }
+
+  /* Hide vertical side metadata — doesn't translate well stacked */
+  .chap-side-meta {
+    display: none;
+  }
+
+  /* Tighter inset on mobile */
+  .chap-frame {
+    top: var(--sp-5);
+    right: var(--sp-5);
+    bottom: var(--sp-5);
+    left: var(--sp-5);
+  }
+
+  .chap-corner {
+    width: 16px;
+    height: 16px;
+  }
+
+  .chap-numeral {
+    font-size: clamp(4.5rem, 18vw, 7rem);
+    top: -0.15em;
+  }
+
+  .chap-left {
+    padding: var(--sp-8) var(--sp-6) var(--sp-8);
+  }
+
+  .chap-content-wrap {
+    min-height: 360px;
+  }
+
+  .chap-scroll-hint {
+    display: none;
+  }
+
+  .chap-overview {
+    max-width: unset;
+  }
+}
+
+@media (max-width: 540px) {
+  .chap-right {
+    height: 64vw;
+  }
+
+  .chap-highlights {
+    gap: var(--sp-5);
+  }
+
+  .chap-hl-value {
+    font-size: 1.4rem;
+  }
+
+  .chap-wm-name {
+    font-size: 1rem;
+  }
+}
+
+
+
+/* ═══════════════════════════════════════════════════════════════
+   BENTO GRID — Portfolio Section
+   ═══════════════════════════════════════════════════════════════ */
+
+/* ── Section wrapper ── */
+.bento-section {
+  padding: var(--sp-16) var(--sp-section) var(--sp-12);
+}
+
+/* ── Header row ── */
+.bento-header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: var(--sp-6);
+  margin-bottom: var(--sp-8);
+}
+
+.bento-header-left {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-2);
+}
+
+.bento-ds-label {
+  color: rgba(250, 249, 246, 0.40);
+  margin-bottom: 0;
+}
+
+.bento-section-title {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 4vw, 3.25rem);
+  font-weight: 500;
+  line-height: 1;
+  color: var(--text-inv);
+  letter-spacing: -0.01em;
+}
+
+.bento-view-all {
+  font-family: var(--font-body);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  color: rgba(250, 249, 246, 0.50);
+  text-decoration: none;
+  white-space: nowrap;
+  padding-bottom: 6px;
+  transition: color 0.2s ease;
+}
+.bento-view-all:hover {
+  color: var(--text-inv);
+}
+
+/* ── Scroll grid ──
+   Altura = 2 × 248px cards + 10px gap = 506px                  */
+.bento-grid {
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  height: 506px;
+  gap: 10px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scrollbar-width: none;
+  cursor: grab;
+}
+.bento-grid::-webkit-scrollbar { display: none; }
+.bento-grid:active { cursor: grabbing; }
+
+/* ── Column types ── */
+.bento-col-tall {
+  flex: 0 0 360px;
+  height: 506px;
+}
+
+.bento-col-pair {
+  flex: 0 0 260px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  height: 506px;
+}
+
+/* ── Card base ── */
+.bento-card {
+  display: block;
+  width: 100%;
+  height: 100%;
+  position: relative;
+  border-radius: 12px;
+  overflow: hidden;
+  background-size: cover;
+  background-position: center;
+  text-decoration: none;
+  color: inherit;
+  /* Garante que o overflow:hidden recorte corretamente antes da composição */
+  isolation: isolate;
+}
+
+/* Cards dentro de par: altura fixa para preencher os dois slots */
+.bento-col-pair .bento-card {
+  height: 248px;
+  flex: 0 0 248px;
+}
+
+/* ── Veil (escurece → clareia no hover) ── */
+.bento-veil {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.28);
+  transition: background 0.3s ease;
+  z-index: 1;
+  pointer-events: none;
+}
+.bento-card:hover .bento-veil {
+  background: rgba(0, 0, 0, 0.04);
+}
+
+/* ── Badge de categoria ── */
+.bento-badge {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  z-index: 3;
+  background: rgba(8, 8, 8, 0.62);
+  color: rgba(250, 249, 246, 0.88);
+  font-family: var(--font-body);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  padding: 4px 9px;
+  border-radius: var(--r-pill);
+  pointer-events: none;
+}
+
+/* ── Barra estática inferior (some no hover) ──
+   Usa gradiente em vez de backdrop-filter para evitar
+   artefatos de composição nas bordas arredondadas.           */
+.bento-static-bar {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 3;
+  /* gradiente preenchendo todos os cantos */
+  padding: 40px 16px 14px;
+  background: linear-gradient(
+    to top,
+    rgba(4, 4, 10, 0.88) 0%,
+    rgba(4, 4, 10, 0.60) 55%,
+    transparent 100%
+  );
+  border-radius: 0 0 12px 12px;
+  transition: opacity 0.25s ease;
+  pointer-events: none;
+}
+.bento-static-bar span {
+  display: block;
+  color: var(--text-inv);
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 500;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.bento-card:hover .bento-static-bar {
+  opacity: 0;
+}
+
+/* ── Overlay deslizante no hover ── */
+.bento-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 4;
+  padding: 20px 18px 18px;
+  background: rgba(6, 6, 14, 0.92);
+  border-radius: 0 0 12px 12px;
+  transform: translateY(100%);
+  transition: transform 0.3s ease;
+  pointer-events: none;
+}
+.bento-card:hover .bento-overlay {
+  transform: translateY(0);
+}
+
+.bento-overlay-meta {
+  font-family: var(--font-body);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  color: rgba(250, 249, 246, 0.48);
+  margin-bottom: 5px;
+}
+
+.bento-overlay-title {
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--text-inv);
+  line-height: 1.2;
+  margin-bottom: 7px;
+}
+
+.bento-overlay-desc {
+  font-family: var(--font-body);
+  font-size: 12px;
+  line-height: 1.5;
+  color: rgba(250, 249, 246, 0.65);
+  margin-bottom: 13px;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.bento-overlay-cta {
+  font-family: var(--font-body);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  color: var(--text-inv);
+}
+
+/* ── Placeholder card ── */
+.bento-card--placeholder {
+  background: rgba(255, 255, 255, 0.03);
+  border: none;
+  cursor: default;
+}
+.bento-card--placeholder .bento-veil {
+  display: none;          /* sem veil — fundo já é escuro */
+}
+.bento-card--placeholder:hover .bento-static-bar {
+  opacity: 0;
+}
+
+.bento-placeholder-img {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1;
+}
+.bento-placeholder-img span {
+  font-family: var(--font-body);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  color: rgba(250, 249, 246, 0.22);
+  text-align: center;
+  padding: 0 var(--sp-6);
+}
+
+/* ── Footer com hint + setas ── */
+.bento-footer {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: var(--sp-3);
+  margin-top: var(--sp-5);
+}
+
+.bento-hint {
+  font-family: var(--font-body);
+  font-size: 11px;
+  letter-spacing: 0.04em;
+  color: rgba(250, 249, 246, 0.28);
+  margin-right: auto;
+}
+
+.bento-arrow {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  border: 1px solid rgba(250, 249, 246, 0.18);
+  background: transparent;
+  color: var(--text-inv);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 0.2s ease, border-color 0.2s ease;
+  flex-shrink: 0;
+}
+.bento-arrow:hover {
+  background: rgba(250, 249, 246, 0.10);
+  border-color: rgba(250, 249, 246, 0.36);
+}
+.bento-arrow:active {
+  background: rgba(250, 249, 246, 0.16);
+}
+
+/* ── Responsivo ── */
+@media (max-width: 900px) {
+  .bento-section {
+    padding: var(--sp-12) var(--sp-8) var(--sp-8);
+  }
+  .bento-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--sp-3);
+    margin-bottom: var(--sp-6);
+  }
+  .bento-view-all { padding-bottom: 0; }
+  .bento-grid { height: 440px; }
+  .bento-col-tall { flex: 0 0 290px; height: 440px; }
+  .bento-col-pair { flex: 0 0 215px; height: 440px; }
+  .bento-col-pair .bento-card { height: 215px; flex: 0 0 215px; }
+}
+
+@media (max-width: 540px) {
+  .bento-section {
+    padding: var(--sp-10) var(--sp-5) var(--sp-6);
+  }
+  .bento-grid { height: 360px; }
+  .bento-col-tall { flex: 0 0 220px; height: 360px; }
+  .bento-col-pair { flex: 0 0 170px; height: 360px; }
+  .bento-col-pair .bento-card { height: 175px; flex: 0 0 175px; }
+  .bento-hint { display: none; }
+}
+
+
+/* ═══════════════════════════════════════════════════════════════
+   PROJECTS PAGE — /projetos
+   ═══════════════════════════════════════════════════════════════ */
+
+/* ── Hero ── */
+.projects-page-hero {
+  padding: 7rem var(--sp-section) var(--sp-16);
+  background:
+    linear-gradient(160deg, rgba(27, 38, 74, 0.97) 0%, rgba(14, 14, 22, 0.96) 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Subtle geometric texture behind the hero */
+.projects-page-hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(250,249,246,0.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(250,249,246,0.025) 1px, transparent 1px);
+  background-size: 60px 60px;
+  pointer-events: none;
+}
+
+.projects-page-hero-body {
+  position: relative;
+  max-width: 680px;
+}
+
+.projects-page-label {
+  color: rgba(250, 249, 246, 0.40);
+  margin-bottom: var(--sp-3);
+}
+
+.projects-page-title {
+  font-family: var(--font-display);
+  font-size: clamp(2.6rem, 5.5vw, 4.5rem);
+  font-weight: 500;
+  line-height: 1;
+  color: var(--text-inv);
+  letter-spacing: -0.02em;
+  margin-bottom: var(--sp-5);
+}
+
+.projects-page-desc {
+  font-family: var(--font-body);
+  font-size: clamp(14px, 1.5vw, 16px);
+  line-height: 1.65;
+  color: rgba(250, 249, 246, 0.62);
+  max-width: 520px;
+  margin-bottom: var(--sp-6);
+}
+
+.projects-page-count {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sp-2);
+  font-family: var(--font-body);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(250, 249, 246, 0.45);
+  padding: 5px 12px;
+  border: 1px solid rgba(250, 249, 246, 0.12);
+  border-radius: var(--r-pill);
+}
+
+/* ── Seção do grid (sem header interno — o hero já dá contexto) ── */
+.projects-bento-section {
+  /* Remove o padding-top padrão do bento-section para ficar colado ao hero */
+  padding-top: var(--sp-10);
+}
+
+@media (max-width: 900px) {
+  .projects-page-hero {
+    padding: 6rem var(--sp-8) var(--sp-12);
+  }
+}
+
+@media (max-width: 540px) {
+  .projects-page-hero {
+    padding: 5rem var(--sp-5) var(--sp-10);
+  }
+}
+
+
+/* ═══════════════════════════════════════════════════════════════
+   BENTO GRID — Mobile / touch overrides
+   Usa (hover: none) + (pointer: coarse) para atingir apenas
+   dispositivos touch, sem afetar o desktop.
+   ═══════════════════════════════════════════════════════════════ */
+
+@media (hover: none) and (pointer: coarse) {
+
+  /* ── Desabilita todos os efeitos de hover ── */
+
+  /* Véu: mantém escuro (sem clarear ao toque) */
+  .bento-card:hover .bento-veil {
+    background: rgba(0, 0, 0, 0.28);
+  }
+
+  /* Barra estática: sempre visível, nunca some */
+  .bento-card:hover .bento-static-bar {
+    opacity: 1;
+  }
+
+  /* Overlay: nunca desliza, permanece oculto */
+  .bento-card:hover .bento-overlay {
+    transform: translateY(100%);
+  }
+
+  /* ── Indicador de clique na barra inferior ── */
+  .bento-static-bar::after {
+    content: 'Clique para ver mais detalhes';
+    display: block;
+    font-family: var(--font-body);
+    font-size: 10px;
+    font-weight: 500;
+    color: rgba(250, 249, 246, 0.42);
+    letter-spacing: 0.03em;
+    margin-top: 3px;
+  }
+
+  /* Sem indicador nos cards placeholder */
+  .bento-card--placeholder .bento-static-bar::after {
+    display: none;
+  }
+}
+
+
+/* ═══════════════════════════════════════════════════════════════
+   BENTO — Barra de progresso horizontal
+   Sempre no DOM, visível apenas em dispositivos touch.
+   ═══════════════════════════════════════════════════════════════ */
+
+.bento-progress-track {
+  display: block;           /* visível no desktop e mobile */
+  height: 3px;
+  background: rgba(250, 249, 246, 0.10);
+  border-radius: var(--r-pill);
+  margin-top: var(--sp-4);
+  overflow: hidden;
+}
+
+.bento-progress-fill {
+  height: 100%;
+  background: rgba(250, 249, 246, 0.50);
+  border-radius: var(--r-pill);
+  transition: width 0.12s ease;
+  min-width: 6%;            /* sempre mostra algo para indicar que é scrollável */
+}
+
+@media (hover: none) and (pointer: coarse) {
+  /* Espaçamento generoso entre "Voltar ao site" e o título da página */
+  .projects-page-hero .back-link {
+    margin-bottom: var(--sp-16);
+  }
+}

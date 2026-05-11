@@ -48,6 +48,11 @@ export const projects: Project[] = [
       'Entrega dentro do período pactuado, com checklist de ocupação cumprido e documentação técnica consolidada.',
     technicalInfo:
       'Área aproximada de intervenção sob gestão: 2.000 m² · Padrões de segurança NR aplicáveis durante toda obra.',
+    highlights: [
+      { value: '2.000 m²', label: 'Área gerenciada' },
+      { value: '45 dias', label: 'Prazo de entrega' },
+      { value: '100%', label: 'Checklist de ocupação' },
+    ],
   },
   {
     slug: 'royal-tenis',
@@ -71,6 +76,11 @@ export const projects: Project[] = [
       'Etapa atual: acabamentos finais e ornamental — previsível para fechamento com marcos já acordados com o cliente.',
     technicalInfo:
       'Gestão técnica com registro atualizado • Relatório fotográfico quinzenal.',
+    highlights: [
+      { value: '45 dias', label: 'Prazo de entrega' },
+      { value: '3', label: 'Equipes coordenadas' },
+      { value: 'Recife, PE', label: 'Localização' },
+    ],
   },
   
 ]
